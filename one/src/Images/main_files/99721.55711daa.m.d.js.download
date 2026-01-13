@@ -1,0 +1,224 @@
+"use strict";(self.webpackChunkhousing_demand=self.webpackChunkhousing_demand||[]).push([[32619,68427,99721],{1100:(e,t,r)=>{r.d(t,{R:()=>getCookie});const getCookie=e=>{let t=e+"=",r=decodeURIComponent(document.cookie).split(";");for(let e=0;e<r.length;e++){let a=r[e];for(;" "==a.charAt(0);)a=a.substring(1);if(0==a.indexOf(t))return a.substring(t.length,a.length)}return""}},13161:(e,t,r)=>{r.d(t,{default:()=>__WEBPACK_DEFAULT_EXPORT__});var a=r(44588),n=r.n(a),i=r(99413),s=r(66104);const o=i.J`
+  query {
+    userDetails {
+      id
+      loggedIn
+      name
+      email
+      phone
+      profileType
+      profileTypes
+      isUser
+      isOwner
+      isBroker
+      isSeller
+      isBuilder
+      isPrime
+      designation
+      experience
+      isPasswordRandom
+      shareShortlistUrl
+      gplusConnected
+      fbConnected
+      url
+      image
+      emailVerified
+      phoneVerified
+      isHpPaidProfile
+      isPaidProfile
+      countryData {
+        id
+        name
+        urlName
+        countryCode
+      }
+      uuid
+      hideProfilePicture
+      whatsappSubscription
+      profileUuid
+      profile
+      userStatus
+    }
+  }
+`;function __WEBPACK_DEFAULT_EXPORT__(e){let t=!(arguments.length>1&&void 0!==arguments[1])||arguments[1];return(r,a,i)=>{let{fetch:l}=i;const{login:c,login:{loggedIn:d},cookies:{hasLoginAuth:u}}=a()||{};return d&&!e?Promise.resolve(c):u?l({query:{query:o},cacheType:"network-only",log:!1,withCredentials:!0,url:`${n().endPoints.gql}/auth`,apiName:"USER_DETAILS_API"}).catch((e=>e)).then((function(){let{data:{data:{userDetails:e}={}}={}}=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};return t?r((0,s.A)({login:e||{},redirect:!1})):e})):(r({type:"SET_LOGIN_PARAM",payload:{attempted:!0}}),Promise.resolve({loggedIn:!1,err:"No Auth Token"}))}}},13457:e=>{function hasOwnProperty(e,t){return Object.prototype.hasOwnProperty.call(e,t)}e.exports=function(e,t,r,a){t=t||"&",r=r||"=";var n={};if("string"!=typeof e||0===e.length)return n;var i=/\+/g;e=e.split(t);var s=1e3;a&&"number"==typeof a.maxKeys&&(s=a.maxKeys);var o=e.length;s>0&&o>s&&(o=s);for(var l=0;l<o;++l){var c,d,u,p,g=e[l].replace(i,"%20"),m=g.indexOf(r);m>=0?(c=g.substr(0,m),d=g.substr(m+1)):(c=g,d=""),u=decodeURIComponent(c),p=decodeURIComponent(d),hasOwnProperty(n,u)?Array.isArray(n[u])?n[u].push(p):n[u]=[n[u],p]:n[u]=p}return n}},15033:(e,t,r)=>{r.d(t,{DQ:()=>c,EO:()=>s,KK:()=>radiusFilterValueFormatter,VR:()=>d,sN:()=>l,vP:()=>sortOptions,xx:()=>o});const a=[{key:"7",value:"updated_at",label:"Date Added",order:"desc"}],n=[{key:"7",value:"roi_sort",label:"RoI (Dec)",order:"desc"}],i=[{key:"5",value:"per_sqft_rate",label:"Area (Inc)"},{key:"6",value:"per_sqft_rate",label:"Area (Dec)",order:"desc"}],sortOptions=function(e){let t=arguments.length>1&&void 0!==arguments[1]&&arguments[1],r=arguments.length>2&&void 0!==arguments[2]&&arguments[2],s=arguments.length>3?arguments[3]:void 0,o=[{key:"1",value:"relevance",label:"Relevance"},{key:"2",value:"price",label:r?"Price (Inc.) ↑":"Price (Inc)"},{key:"3",value:"price",label:r?"Price (Dec.) ↓":"Price (Dec)",order:"desc"}];return"buy"===e&&o.splice(3,0,...((e,t)=>[{key:"5",value:"per_sqft_rate",label:t?"Price / sqft. (Inc.) ↑":(e?"Price per sq. ft.":"Area")+" (Inc)"},{key:"6",value:"per_sqft_rate",label:t?"Price / sqft. (Dec.) ↓":(e?"Price per sq. ft.":"Area")+" (Dec)",order:"desc"},{key:"7",value:"updated_at",label:"Date Added",order:"desc"}])(t,r)),"rent"===e&&o.splice(3,0,...a),"commercial"===e&&(o.splice(3,0,...i),"buy"===s&&o.splice(1,0,...n)),o},s={"Nearby Localities":"6","Popular Localities":"5"},o={1:{key:1,label:"1 RK",param:"1 rk",mapped_ids:["1","11","53"]},2:{key:2,label:"1 BHK",param:"1 bhk",mapped_ids:["46","2","47"]},3:{key:3,label:"2 BHK",param:"2 bhk",mapped_ids:["8","3","9","48","52"]},4:{key:4,label:"3 BHK",param:"3 bhk",mapped_ids:["44","4","10"]},71:{id:71,param:"4 bhk",label:"4 BHK",mapped_ids:[45,5,50]},72:{id:72,param:"5 bhk",label:"5 BHK",mapped_ids:[63,6,49]},7:{id:7,param:"5+ bhk",label:"5+ BHK",mapped_ids:[7,51,55,56,57,58,59,64,65,66,67,68,73,74]},5:{key:5,label:"3+ BHK",param:"3+ bhk",mapped_ids:["5","6","7","45","50","49","51"]}},l=[{id:1,param:"1 rk",name:"1 RK",mapped_ids:[1,11,53],mapped_names:["1 RK","1 R","Studio"]},{id:2,param:"1 bhk",name:"1 BHK",mapped_ids:[46,2,47],mapped_names:["1.5 BHK","1 BHK","2R"]},{id:3,param:"2 bhk",name:"2 BHK",mapped_ids:[8,3,9,48,52],mapped_names:["2.5 BHK","2 BHK","2 RK","2 BH","3 R"]},{id:4,param:"3 bhk",name:"3 BHK",mapped_ids:[44,4,10],mapped_names:["3.5 BHK","3 BHK","3 RK"]},{id:71,param:"4 bhk",name:"4 BHK",mapped_ids:[45,5,50],mapped_names:["4.5 BHK","4 BHK","4 RK"]},{id:72,param:"5 bhk",name:"5 BHK",mapped_ids:[63,6,49],mapped_names:["5.5 BHK","5 BHK","5 RK"]},{id:7,param:"5+ bhk",name:"5+ BHK",mapped_ids:[7,51,55,56,57,58,59,64,65,66,67,68,73,74],mapped_names:["5+ BHK","6 RK","6 BHK","7 BHK","8 BHK","9 BHK","10 BHK","6.5 BHK","7.5 BHK","8.5 BHK","9.5 BHK","10.5 BHK","11 BHK","12 BHK"]},{id:54,name:"Plot",mapped_ids:[54,60],mapped_names:["Plot","Plots/Agriculture land"]},{id:60,name:"Commercial",mapped_ids:[61,62],mapped_names:["Shop","Office"]}],c=[{index:0,name:"0",param:"0",value:0},{index:1,name:"1 kms",param:"1000",paramV2:"1000",value:1e3},{index:2,name:"2 kms",param:"2000",paramV2:"2000",value:2e3},{index:3,name:"3 kms",param:"3000",paramV2:"3000",value:3e3},{index:4,name:"4 kms",param:"4000",paramV2:"4000",value:4e3},{index:5,name:"5 kms",param:"5000",paramV2:"5000",value:5e3},{index:6,name:"6 kms",param:"6000",paramV2:"6000",value:6e3},{index:7,name:"7 kms",param:"7000",paramV2:"7000",value:7e3},{index:8,name:"8 kms",param:"8000",paramV2:"8000",value:8e3},{index:9,name:"9 kms",param:"9000",paramV2:"9000",value:9e3},{index:10,name:"10 kms",param:"10000",paramV2:"10000",value:1e4}],radiusFilterValueFormatter=e=>{let{val:t}=e;return 0===t?"0":t/1e3+" kms"},d=c.map(((e,t)=>{let{value:r}=e;return{value:r,label:t%2==0?radiusFilterValueFormatter({val:r}):""}}))},15279:(e,t,r)=>{r.d(t,{default:()=>__WEBPACK_DEFAULT_EXPORT__});var a=r(38130),n=r(44588),i=r.n(n),s=r(99413),o=r(37212);const l=s.J`
+  fragment SeoChk on Seo {
+    title
+    sideMenu
+    description
+    filterLinks
+    footerLinks
+    leafPageLinks
+    unitConversionLinks {
+      url
+      label
+    }
+    htmlSitemapLinks {
+      url
+      label
+    }
+    meta {
+      city {
+        name
+        id
+        cityId
+        url
+        isTierTwo
+        products
+      }
+      languageCodes
+    }
+    redirectUrl
+    statusCode
+    breadCrumbs {
+      label
+      url
+    }
+    pageType
+    lang
+    languageList
+    breadCrumbsMoreLinks
+    contentSnippet
+    moreLinksPresent
+    featureType
+    suggestedLinks
+    extraLinks
+    popularSearchesNearby {
+      url
+      label
+    }
+    inventoryCount {
+      buy {
+        data {
+          name
+          count
+          link {
+            href
+            name
+          }
+        }
+        title
+        count
+        link {
+          href
+          name
+        }
+      }
+      rent {
+        data {
+          name
+          count
+          link {
+            href
+            name
+          }
+        }
+        title
+        count
+        link {
+          href
+          name
+        }
+      }
+      project {
+        data {
+          name
+          count
+          link {
+            href
+            name
+          }
+        }
+        title
+        count
+        link {
+          href
+          name
+        }
+      }
+    }
+    structuredData
+    noIndex
+    noFollow
+    canonical
+    imageUrl
+    keywords
+    h1
+    h2
+    entities {
+      id
+      name
+      type
+      subType
+      displayType
+    }
+    housingEdge {
+      url
+      orderType
+      label
+    }
+    pincodeIl {
+      url
+      label
+      links {
+        url
+        label
+      }
+    }
+    ifscIl {
+      url
+      label
+    }
+  }
+  query(
+    $hash: String
+    $filters: JSON
+    $service: String
+    $category: String
+    $pageType: String
+    $city: CityInput
+    $entities: [RealEstateEntityInput]
+    $page: String
+    $trimmed: Boolean
+    $url: String
+    $sideMenuOnly: Boolean!
+    $breadCrumbsMoreLinks: Boolean!
+    $seoChk: Boolean!
+    $searchFromCollection: Boolean
+    $quickLink: String
+    $landing: String
+    $listingId: String
+    $pageCategoryType: String
+    $localityId: String
+    $unmodifiedUrl: String
+  ) {
+    seo(
+      service: $service
+      category: $category
+      pageType: $pageType
+      filters: $filters
+      city: $city
+      entities: $entities
+      hash: $hash
+      page: $page
+      trimmed: $trimmed
+      listingId: $listingId
+      pageCategoryType: $pageCategoryType
+      unmodifiedUrl: $unmodifiedUrl
+      localityId: $localityId
+      url: $url
+      searchFromCollection: $searchFromCollection
+      quickLink: $quickLink
+      landing: $landing
+    ) {
+      sideMenu @include(if: $sideMenuOnly)
+      breadCrumbsMoreLinks @include(if: $breadCrumbsMoreLinks)
+      ...SeoChk @include(if: $seoChk)
+    }
+  }
+`;function __WEBPACK_DEFAULT_EXPORT__(e){let{canCatch:t=!1,sideMenu:r=!1,addSideMenu:n=!1,breadCrumbsMoreLinks:s=!1,includeBreadCrumbsMoreLinks:c=!1,isCollectionPage:d,isMapSelected:u=!1,mapSelectedEntities:p=[],pageCategoryType:g,...m}=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},y=arguments.length>2?arguments[2]:void 0;return(h,f,v)=>{let{fetch:_}=v;const{routeParams:{url:b,params:{quickLink:x=null,listingId:S,type:k,uuid:C}={}},filters:{service:A,category:w,selectedCity:I}={},shell:{useragent:{isBot:T,vernac:P}}}=f(),E=!!T||n||r||s||c,{filters:{service:O}={}}=m||{},U={service:"commercial"===w&&O?O:A,category:w,city:I,listingId:S,localityId:C,pageCategoryType:g||k,pageType:e,url:void 0,...m,trimmed:!E,searchFromCollection:d,quickLink:x||(b&&b.includes("/reviews")?"reviews":null)};return _({apiName:o.Tr,cacheType:"stale",query:{query:y||l,variables:JSON.stringify({...U,sideMenuOnly:n||r,breadCrumbsMoreLinks:c||s,seoChk:!(r||s)})}}).then((e=>{let{status:t,data:{data:{seo:r}={}}}=e;const{entities:n,meta:s,...o}=r||{},{city:l,languageCodes:c}=s||{};if(200!==t)return{};const d={};return l&&l.id&&(d.city=l),u&&p&&p.length?d.entities=p:!u&&n&&n.length&&(d.entities=n),Object.keys(d).length&&h((0,a.default)(d,!1,"",!1,!1,!0,!1)),o.canonical&&(o.canonical=`https://${i().domainName}${P||""}/${o.canonical.replace(/^(https:\/\/housing\.com\/|\/)/g,"")}`),h({type:"SET_SEO_PARAM",payload:{...o,languageCodes:c,variables:U,...u&&p&&p.length?{h1:`Properties for Sale Near ${p[0]?.name}`}:{}}}),r||{}})).catch((e=>{if(!t)throw e}))}}},21248:(e,t,r)=>{r.d(t,{default:()=>p});var a=r(19097),n=r(75641),i=r.n(n),s=r(11349),o=r(28667),l=r(55713),c=r(92790),d=(r(68032),r(44759));r(1814);function _extends(){return _extends=Object.assign?Object.assign.bind():function(e){for(var t=1;t<arguments.length;t++){var r=arguments[t];for(var a in r)({}).hasOwnProperty.call(r,a)&&(e[a]=r[a])}return e},_extends.apply(null,arguments)}const u={},p=(0,o.A)({props:function(){let{shell:{useragent:{vernac:e}={}}={},seo:{linkParams:t}={},routeParams:{query:r=u,path:a}={}}=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{},{target:n}=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{};return{target:n,linkParams:t,query:r,vernac:e,currUrl:a}},actions:{}})((e=>{let{children:t,href:r,target:o,style:u,className:p,linkParams:g={},query:m={},vernac:y,external:h,label:f,useDefaultTarget:v=!1,inlineStyle:_,currUrl:b="",removeNoFollow:x=!1,...S}=e;const k=r?encodeURI(r):r,C=o||(v?"_blank":"")||g.target,A=t||f,[{isExternal:w=h,externalUrl:I=k,isPhoenixRoute:T=!h,isEdgeRoute:P},E]=(0,n.useState)((()=>({...h?{}:(0,c.t)(k,!!g.target,b),externalUrl:k}))),O=(0,s.useHistory)();if((0,n.useEffect)((()=>{if(h)return void E({externalUrl:k});const e=(0,c.t)(k,!!g.target,b);E({...e,externalUrl:e.isExternal&&(0,l.A)(k,m)||k})}),[k,g.target,m,h]),!k)return i().createElement("span",_extends({style:_,className:(0,a.cx)(u,p)},S),A);const U=new RegExp(".*?housing\\.com"+(y?`(\\${y})?`:""));let j=(T||P&&!w)&&I?I.replace(U,""):"";if(w){let e=I;e=(0,d.A)({link:I,vernac:y});const t=x?{}:{rel:"nofollow"};return i().createElement("a",_extends({},g,S,{style:_,className:(0,a.cx)(u,p),href:T||P&&!w?O.createHref({pathname:j}):e,target:C},t),A)}return i().createElement(s.Link,_extends({},g,S,{className:(0,a.cx)(u,p),to:j,target:C,style:_}),A)}))},22014:(e,t,r)=>{r.d(t,{A:()=>__WEBPACK_DEFAULT_EXPORT__,U:()=>pick});const pick=(e,t)=>t.reduce(((t,r)=>(e[r]&&(t[r]=e[r]),t)),{}),__WEBPACK_DEFAULT_EXPORT__=(e,t,r)=>{let a;try{"string"==typeof t&&(t=t.replace(/[[\]]/g,".").split(".").filter((e=>""!==e))),a=t.reduce(((e,t)=>e[t]),e)}catch(e){}return void 0===a&&(a=r),a}},22045:(e,t,r)=>{r.d(t,{A:()=>se});var a=r(63502),n=r(75641),i=r.n(n),s=r(94199),o=r(92925),l=r(43286),c=r(28667),d=r(84589),u=r(75492),p=r(21116),g=r(29566),m=r(58147),y=r(38130),h=r(36276),f=r(46653),v=r(19848),_=r(25013),b=r(35753),x=r(95777);const{primary:S}=x.A,k={name:"p5xx4",styles:"display:flex;align-items:center;border-radius:0;border-left:1px solid #e6e6e6;padding:0px 5px;position:relative;"},C=(0,a.css)("padding:15px 5px;align-items:center;cursor:pointer;width:135px;.option{& + .option{margin-top:0;}&::before{margin-right:5px;}}.active{color:",S,";}.options-wrap{display:flex;justify-content:space-between;}"),A=(0,a.css)("background:url(","//c.housingcdn.com/demand/s/client/common/assets/newIcon.79b46c70.svg",") no-repeat;position:relative;left:51px;top:-71px;height:32px;width:42px;"),w={name:"ppke03",styles:"font-weight:400;font-size:14px;line-height:17px;padding:0px;margin:10px 0;"},I=(0,c.A)({props:e=>{let{filters:{service:t,category:r,selectedCity:a}}=e;return{service:t,category:r,selectedCity:a}},actions:{setProduct:v.A,resetFilters:_.A}})((e=>{const{category:t,service:r,setProduct:i,resetFilters:s,isNewHomeScreen:o=!1}=e,[l,c]=(0,n.useState)(r),d=(0,n.useCallback)((function handleOptionChange(e){let{selectedValues:r}=e;s({service:r,category:t},!1),i(r,t),c(r)}),[i,s,l,r]);return(0,n.useEffect)((()=>{c(r)}),[r]),(0,a.jsx)("div",null,(0,a.jsx)("div",{css:(0,a.css)([k,o&&w],"")},(0,a.jsx)(b.A,{style:C,items:[{id:"buy",name:"Buy"},{id:"rent",name:"Lease"}],type:"radio",displayType:"radio",selectedValues:l,onChange:d})),!o&&(0,a.jsx)("div",{css:A}))}));var T=r(55713),P=r(47651);const E={AUTO_SUGGESTION_SEARCH:()=>({category:"auto_suggestion",action:"search"}),AUTO_SUGGESTION_SELECT:(e,t)=>{const{entity:{id:r}={}}=t;return{category:"auto_suggestion",action:"select",dimensions:{polygonId:r,localityId:r}}},MOONDRAGON_SUGGEST_TYPE:function(e){let t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{};const{label:r=""}=t;return{category:"query_search",action:"type",label:r}},MOONDRAGON_SUGGEST_CLICK:function(e){let t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{};const{label:r=""}=t;return{category:"query_search",action:"click",label:r}}};var O=r(82804),U=r(70682),j=r(49499),B=r(26541),N=r(26401);const R="//c.housingcdn.com/demand/s/client/common/assets/locality.6dffc29e.svg";const H={name:"1ijvv3i",styles:"position:relative;z-index:2;width:100%;height:50px;"},L={name:"1ofs0f7",styles:"width:100%;padding:16px 0 16px 10px;border:none;font-size:14px;line-height:16px;"},K={name:"17mqpqg",styles:"background-color:#fff;box-shadow:0 1px 10px 0 rgba(0,0,0,0.2);"},$={name:"511jaf",styles:"display:flex;justify-content:space-between;padding:14px 20px;border-bottom:1px solid #e6e6e6;line-height:18px;font-weight:500;cursor:pointer;div{max-width:calc(100% - 120px);}"},M=((0,a.css)("height:24px;width:24px;margin-right:7px;background-size:cover;background-image:url(",R,");"),{name:"14i95vy",styles:"background-color:rgba(94,35,220,0.08);"}),q={name:"1l7mgse",styles:"font-weight:normal;"},D=(0,a.css)("font-size:10px;color:#999;text-transform:uppercase;text-align:center;@media (",B.hf,"){font-size:10.5px;}"),G={name:"1omg61y",styles:"background-color:#f0f0f0;height:64px;padding:15px 20px;"},F=(0,a.css)("font-size:12px;padding-top:5px;font-weight:400;color:var(--text_colors-grey-800,#434343);@media (",B.hf,"){font-size:12.5px;}"),V={name:"1p4u9fo",styles:"color:var(--text_colors-grey-800,#434343);font-weight:500;"},z={name:"1nm99ps",styles:"color:#000;font-weight:500;"},W=(0,a.css)("color:var(--text_colors-grey-600,#656565);font-size:14px;@media (",B.hf,"){font-size:14.5px;}"),Q=(0,a.css)("font-size:14px;color:#767676;font-weight:bold;position:absolute;top:17px;&:before{",(0,N.Ay)("search"),"}"),J={name:"2v1y1k",styles:"border-bottom:0px;font-size:14px;font-weight:400;line-height:14.22px;color:#000000;"},X=((0,a.css)("font-size:12px;line-height:12px;color:#000000;opacity:0.38;@media (",B.hf,"){font-size:12px;}"),function(){return(0,a.css)("margin-top:3px;padding:",arguments.length>0&&void 0!==arguments[0]&&arguments[0]?"8px 0":"0px",";box-shadow:0px 0px 4px rgb(0 0 0 / 25%);border-radius:4px;")}),Y={name:"1hj78da",styles:"font-weight:400;font-size:12px;line-height:12px;color:var(--text_colors-grey-800,#434343);padding:7px 16px 16px 16px;"},Z={name:"1ajtqaz",styles:"font-weight:500;font-size:10px;line-height:12px;color:#000000;opacity:0.38;padding:14px 20px;text-transform:uppercase;"},ee=(0,a.css)("font-size:14px;color:#767676;font-weight:bold;display:inline-block;width:32px;height:32px;border-radius:8px;display:flex;justify-content:center;align-items:center;color:#5e23dc;background-color:#ffffff;&:before{",(0,N.Ay)("search"),"}"),te={name:"1baulvz",styles:"display:inline-block;"};var re=r(59085),ae=r(28525),ne=r(93290),ie=r(53192);function _extends(){return _extends=Object.assign?Object.assign.bind():function(e){for(var t=1;t<arguments.length;t++){var r=arguments[t];for(var a in r)({}).hasOwnProperty.call(r,a)&&(e[a]=r[a])}return e},_extends.apply(null,arguments)}const CrossCity=e=>{let{name:t,variant:r}=e;return(0,a.jsx)("div",{css:G},(0,a.jsx)("div",{css:W},"We could not find this"," ","onlyProject"===r?"project":"project/locality"," in"," ",(0,a.jsx)("span",{css:z},t)),(0,a.jsx)("div",{css:F},"Here are results matching from other cities:"))},Typeahead=e=>{let{searchQuery:t,items:r,selectedItem:n,onHover:i,onItemSelect:s,children:o,isCrossCitySearch:l,city:c,loadingResults:d,isNewHomeScreen:u,overrideTypeaheadStyle:p,variant:g,hideCitySuggestion:m,product:y}=e;return(0,a.jsx)("div",{css:(0,a.css)([K,u&&X(r&&r.length>1),p],"")},o,(0,a.jsx)(TypeaheadItems,{searchQuery:t,items:r,selectedItem:n,onHover:i,onItemSelect:s,isCrossCitySearch:l,city:c,loadingResults:d,isNewHomeScreen:u,variant:g,hideCitySuggestion:m,product:y}))},TypeaheadItems=e=>{let{searchQuery:t,items:r,selectedItem:n,onHover:s,onItemSelect:o,isCrossCitySearch:l,city:c,loadingResults:u,isNewHomeScreen:p,variant:g,hideCitySuggestion:m,product:y}=e;const{name:h}=c||{};return["buy","rent","plots"].includes(y)?(0,a.jsx)(i().Fragment,null,p&&r.length>0&&!t&&(0,a.jsx)("div",{css:Y},"Popular search in ",(0,a.jsx)("span",{css:V},h,":")),t||"plots"!==y?(0,a.jsx)(U.A,{list:r||[],loading:u,selectedItem:n,onHover:s,onItemSelect:o,isNewHomeScreen:p,searchQuery:t,AutosuggestString,hideCrossCityBanner:m}):null):(0,a.jsx)("ul",null,l&&t&&!m&&(0,a.jsx)("li",null,(0,a.jsx)(CrossCity,_extends({},c,{variant:g}))),p&&r.length>0&&!t&&(0,a.jsx)("li",{css:Z},"Popular Search"),r.map((e=>{const{name:r,displayType:i,resultId:l,subType:c,displaySubType:u}=e,g=[$,p&&J,n&&n.resultId===l&&M],m=u||(ie.A||{})[c]||i;return(0,a.jsx)("li",{css:g,key:l,onMouseOver:()=>s(e),onClick:o},(0,a.jsx)("div",null,p?r:(0,d.A)(r,t,AutosuggestString)),(0,a.jsx)("span",{css:D},m))})))},AutosuggestString=e=>{let{children:t}=e;return(0,a.jsx)("span",{css:q},t)},se=(0,c.A)({props:e=>{let{home:{externalAds:t={}}={},meta:{featuredLocalities:r}={},filters:{selectedCity:a,service:n,category:i,subCategory:s},masterData:{cityList:{topCities:o=[],otherCities:l=[]}={}}={},routeParams:{query:c={}}}=e;const{data:d=[]}=(r||[]).find((e=>"popular"===e.key))||{},[{name:u}={}]=d||[];return{popularLocality:u,product:(0,re.A)(n,i,s),city:a,cities:[...o,...l],externalAds:t,query:c,service:n,category:i,topLocalities:d,subCategory:s}},actions:{onType:u.w,addEntities:m.A,setBaseFilterParams:y.default,fetchAllCities:O.A,sendToast:p.a,setPlotFilter:g.default}})((e=>{const{style:t,searchButtonStyle:r,searchInputFieldStyle:i,onType:c,addEntities:d,popularLocality:u,city:p,cities:g,product:m,externalAds:y,query:v,setPlotFilter:_,setSelectedSearchItem:b,returnSelectedItem:x,variant:S="default",withCross:k,withSearchIcon:C,fetchAllCities:A,service:w,category:O,sendToast:U,isNewHomeScreen:B=!1,isCitySelectionOpen:N,topLocalities:R,searchIconStyle:K,overrideTypeaheadStyle:$,isSearchButton:M=!1,mobileVersion:q,searchIconBtnStyle:D,defaultSearchQuery:G="",placeholder:F,hideCitySuggestion:V=!1,enableDirectCitySearch:z=!1,subCategory:W,setBaseFilterParams:J,globalSearchExp:X}=e,Y=X&&["buy","rent"].includes((0,re.A)(w,O,W))&&!p?.name,[,Z]=(0,n.useState)(2);(0,n.useEffect)((()=>{Z((0,h.A)(0,3))}),[u]);const[ie,se]=(0,n.useState)([]),[oe,le]=(0,n.useState)(null),[ce,de]=(0,n.useState)(!1),[ue,pe]=(0,n.useState)(G),[ge,me]=(0,n.useState)(!1),[ye,he]=(0,n.useState)(!1),[fe,ve]=(0,n.useState)({}),[_e,be]=(0,n.useState)(!M||!!G),[xe,Se]=(0,ae.Ay)("recently_searched",{type:"localStorage",initialValue:[]}),ke=["buy","rent","plots"].includes(m);(0,n.useEffect)((()=>{pe(G)}),[G]);const{name:Ce=""}=p||{},[Ae,we,Ie]=(0,o.A)(ie,{onSelect:e=>{13===e.keyCode&&(onItemSelect(v),e.preventDefault())},defaultSelectedEntity:oe?null:void 0,key:"resultId"});(0,n.useEffect)((()=>{A({service:w,category:O})}),[w,O]);const Te=(0,P.A)(E);let Pe=(0,n.useRef)(null);const[Ee,Oe]=(0,l.A)(Pe,!1,{typeableComponent:!x}),Ue=(0,n.useCallback)((0,s.A)((e=>{const t=e.trim(),r={rows:10},a=ke?{...r,variant:"moondragonV2",allowedCrossCity:!0,subCategory:W}:{...r,variant:S};t&&c(t,a).then((function(){let{results:e=[],defaultUrl:t="",isCrossCitySearch:r=!1}=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};de(r),se(e.map((e=>{let{id:t,url:r,...a}=e;return{...a,url:r,id:t,resultId:r||t}}))),t&&le({url:t})}))}),300),[c,ke,W]);(0,n.useEffect)((()=>{me(!1)}),[ie]);const onHover=e=>we(e),onItemSelect=async function(){let e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{},t=Ae;if(t||(t=oe),!ue&&(arguments.length>1?arguments[1]:void 0)&&Ce&&z){const e={rows:1},r=ke?{...e,variant:"moondragonV2",allowedCrossCity:!0}:{...e,variant:S},a=await c(Ce,r),{results:n}=a||{};t=(n||[]).map((e=>{let{id:t,url:r,...a}=e;return{...a,url:r,id:t,resultId:r||t}}))[0]}if(!t)return;let r=xe;const a=(0,ne.A)([t],{}),n=xe.findIndex((e=>{let{hash:t,service:r}=e;return t===a&&w===r}));n>=0?r.splice(0,0,r.splice(n,1)[0]):r=[{entities:[t],filters:{},service:w,category:O,cityName:Ce,date:Date.now(),hash:a},...r],Se(r);let i=null;const{crossCityUuid:s}=Ae||{};if(["buy","rent","plots"].includes(m)&&s&&!Y)return he(!0),g?.length>0&&(i=g?.find((e=>e?.id===s))),void(i&&ve({...t,crossCityObj:i}));if(x)!G&&pe(Ae.name),Oe(!1),b(Ae);else{"plots"===m&&_(),ke?Te("MOONDRAGON_SUGGEST_CLICK",{label:(Ae||t).name}):Te("AUTO_SUGGESTION_SELECT",{entity:Ae});const{type:r}=y||{},a="whitelabel"===r,{url:n}=d([t],{replace:!0,apply:!a&&void 0,fromSearch:!0})||{};Oe(!1),a&&((0,T.A)(n,e)||n)&&window.open("/home-loans","_blank").focus()}},je=(0,a.jsx)("input",{type:k?"search":"text",css:(0,a.css)([L,i],""),onKeyDown:Ie,onChange:e=>{return(t=e.target.value)||(x?b(null):B&&se(R.map((e=>{let{id:t,url:r,...a}=e;return{...a,url:r,id:t,resultId:r||t}})))),me(!0),pe(t),Ue(t),void(3===t.length&&(ke?Te("MOONDRAGON_SUGGEST_TYPE",{label:v}):Te("AUTO_SUGGESTION_SEARCH",{value:t})));var t},placeholder:F||{buy:"Search for locality, landmark, project, or builder",rent:"Search for locality, landmark, project, or builder",paying_guest:"Search for locality, landmark",plots:"Search for locality, landmark, project, or builder",commercial:"Search Locality",flatmate:"Search Locality",projects:"Search for Locality, Project"}[m],value:ue,onFocus:()=>{B&&!ue&&(se(R.map((e=>{let{id:t,url:r,...a}=e;return{...a,url:r,id:t,resultId:r||t}}))),Oe(!0))},onBlur:function onBlur(){M&&be(!!ue)}});return q?(0,a.jsx)(n.Fragment,null,(0,a.jsx)("div",{css:(0,a.css)([H,t],""),ref:Pe,"data-q":"search"},je,(ue||B&&!N)&&Ee&&(0,a.jsx)(Typeahead,{searchQuery:ue,items:ie,selectedItem:Ae,onHover,onItemSelect:()=>onItemSelect(v),isCrossCitySearch:ce,city:p,isNewHomeScreen:B,overrideTypeaheadStyle:$,variant:S,hideCitySuggestion:V}),(0,a.jsx)(f.A,{style:D,onClick:()=>{onItemSelect(v)}}))):(0,a.jsx)(n.Fragment,null,_e&&(0,a.jsx)("div",{css:(0,a.css)([H,t],""),ref:Pe,"data-q":"search"},C&&(0,a.jsx)("div",{css:(0,a.css)([Q,K],"")}),je,(ue||B&&!N)&&Ee&&(0,a.jsx)(Typeahead,{searchQuery:ue,items:ie,selectedItem:Ae,onHover,onItemSelect:()=>onItemSelect(v),isCrossCitySearch:ce,city:p,loadingResults:ge,isNewHomeScreen:B,overrideTypeaheadStyle:$,hideCitySuggestion:V||Y,product:m})),M&&!_e&&(0,a.jsx)("div",{css:te},(0,a.jsx)("div",{css:(0,a.css)([ee,"overrideSearchButtonStyle"],""),onClick:function onSearchIconButtonClick(){be(!0)}})),"commercial"===m&&(0,a.jsx)(I,{isNewHomeScreen:B}),(0,a.jsx)(f.A,{style:r,onClick:()=>{onItemSelect(v,!0)}},"Search"),ye&&(0,a.jsx)(j.A,{setIsCrossCityModalOpen:he,crossCityEntity:fe,crossCityModalClickHandler:()=>{const{crossCityObj:e,...t}=fe||{};e&&(J({entities:[t],filters:"plots"===m?{property_type_id:["plot"]}:{}}),he(!1),U({text:"City has been changed to",subText:e?.name,type:"success"}))}}))}))},25013:(e,t,r)=>{r.d(t,{A:()=>__WEBPACK_DEFAULT_EXPORT__});var a=r(53383),n=r(59085),i=r(5064),s=r(18868);function __WEBPACK_DEFAULT_EXPORT__(e){let{service:t,category:r,retainFilters:o={},redirectionPath:l=""}=e,c=!(arguments.length>1&&void 0!==arguments[1])||arguments[1];return(e,d)=>{const{filters:{[(0,n.A)(t,r)]:u}}=d(),p=o;Object.keys(u).forEach((e=>{a.y.indexOf(e)>=0&&(p[e]=u[e])})),e((0,s.A)({[(0,n.A)(t,r)]:p})),c&&e((0,i.A)(void 0,void 0,void 0,void 0,void 0,{redirectionPath:l}))}}},29566:(e,t,r)=>{r.d(t,{default:()=>__WEBPACK_DEFAULT_EXPORT__});var a=r(59085),n=r(18868);const __WEBPACK_DEFAULT_EXPORT__=()=>(e,t)=>{const{filters:{service:r,category:i}={}}=t();e((0,n.A)({[(0,a.A)(r,i)]:{property_type_id:["plot"]}}))}},33215:(e,t,r)=>{t.decode=t.parse=r(13457),t.encode=t.stringify=r(59737)},36276:(e,t,r)=>{r.d(t,{A:()=>__WEBPACK_DEFAULT_EXPORT__});const __WEBPACK_DEFAULT_EXPORT__=(e,t)=>Math.floor(Math.random()*(t-e+1))+e},44737:(e,t,r)=>{r.d(t,{A:()=>a});const a={SIGN_IN_SUCCESS:(e,t)=>{const{label:r,generic1:a,oneTapLogin:n,source:i,signed_in_medium:s}=t||{};return{category:n?"one_tap_login":"login",action:n?"success_google_onetap":"sign_in_success",label:r,dimensions:{generic1:a,...n&&{source:i},...s&&{signed_in_medium:s}}}},SIGN_IN_SUCCESS_MOENGAGE:(e,t)=>{const{name:r,phone:a,email:n}=e.login,{selectedCity:i,entities:s}=e.filters,{label:o}=t||{},l=s.reduce(((e,t)=>("locality"===t.displayType&&e.push(t.name),e)),[]);return{eventLabel:"login_sign_in_success",attributes:{Source:o,User_Name:r,User_Phone:a,User_Email:n,User_City:i.name,User_Locality:l.join(",")}}}}},44759:(e,t,r)=>{r.d(t,{A:()=>__WEBPACK_DEFAULT_EXPORT__});const a=["/news/"],__WEBPACK_DEFAULT_EXPORT__=e=>{let{link:t,vernac:r}=e,n=a.find((e=>t&&t.includes(e)));if(n&&r){const e=r&&r.replace("/","")+"/";let a=t&&t.replace(n,`${n}${e}`);return a=a.endsWith("/")?a.slice(0,-1):a,a+`-${e}`}return t}},47853:(e,t,r)=>{r.d(t,{J:()=>postFingerPrint,E:()=>sendFingerPrintIfChanged});var a=r(15740);var n=r(28525);const getFingerPrintDetails=()=>(e,t)=>{const{routeParams:{query:{debug:a}={}}}=t();return Promise.all([r.e(23433),r.e(24651)]).then(r.bind(r,39476)).then((e=>e.default)).then((async e=>{const t=await e({debug:"true"===a});return await t.get()})).catch((e=>console.log(e)))},sendFingerPrint=(e,t)=>{let{uuid:r,profileUuid:a}=t;return(t,n,i)=>{let{fetch:s}=i;const{cookies:{_ga:o}}=n();e.gaId=o,e.uuid=r,e.profileUuid=a,e=function rtcData(e,t){const r=new RTCPeerConnection({iceServers:[]});return r.addTransceiver("audio",{direction:"sendrecv"}),r.createOffer().then((e=>r.setLocalDescription(e))).then((()=>{const a=r.localDescription.sdp.replace(/(?:rtp|udp)[^\s]+/g,"");e.components.webRtcData=a,e.components.cookiesEnabled=navigator.cookieEnabled;const n={message:[JSON.parse(JSON.stringify(e))]};window&&window.postMessageToWebview&&window.postMessageToWebview("SET_FINGER_PRINT_ID",{fingerPrintId:e.visitorId}),t({url:"https://eventrouter.housing.com/api/v0/publish_event/housinguserdevice",method:"post",body:n,apiName:"EVENT_ROUTER_API",withCredentials:!0}).catch((e=>{}))})).catch((e=>{console.error("Error fetching WebRTC data:",e)})),e}(e,s)}},postFingerPrint=e=>t=>{const{uuid:r,profileUuid:i}=e||{};(0,a.p)((()=>t(getFingerPrintDetails()).then((e=>{(0,n.SO)("fingerprintVisitorId",e.visitorId+i),t(sendFingerPrint(e,{uuid:r,profileUuid:i}))}))))},sendFingerPrintIfChanged=e=>t=>{if(localStorage&&localStorage.getItem&&localStorage.getItem("fingerprintVisitorId")){const{uuid:r,profileUuid:i}=e||{};(0,a.p)((()=>t(getFingerPrintDetails()).then((e=>{const a=localStorage.getItem("fingerprintVisitorId");e.visitorId+i!==a&&((0,n.SO)("fingerprintVisitorId",e.visitorId+i),t(sendFingerPrint(e,{uuid:r,profileUuid:i})))}))))}else t(postFingerPrint(e))}},52699:(e,t,r)=>{r.r(t)},53383:(e,t,r)=>{r.d(t,{y:()=>a});const a=["paid"]},59737:e=>{var stringifyPrimitive=function(e){switch(typeof e){case"string":return e;case"boolean":return e?"true":"false";case"number":return isFinite(e)?e:"";default:return""}};e.exports=function(e,t,r,a){return t=t||"&",r=r||"=",null===e&&(e=void 0),"object"==typeof e?Object.keys(e).map((function(a){var n=encodeURIComponent(stringifyPrimitive(a))+r;return Array.isArray(e[a])?e[a].map((function(e){return n+encodeURIComponent(stringifyPrimitive(e))})).join(t):n+encodeURIComponent(stringifyPrimitive(e[a]))})).filter(Boolean).join(t):a?encodeURIComponent(stringifyPrimitive(a))+r+encodeURIComponent(stringifyPrimitive(e)):""}},66104:(e,t,r)=>{r.d(t,{A:()=>__WEBPACK_DEFAULT_EXPORT__});var a=r(33215),n=r(97413),i=r(28525),s=r(59085),o=r(44737),l=r(47853),c=r(86134);const __WEBPACK_DEFAULT_EXPORT__=e=>{let{login:t,redirect:r=!1,isFirstLogin:d=!1,generic1:u,oneTapLogin:p=!1,loggedInUser:g=!1}=e;return(e,m,y)=>{let{history:h,syncCookies:f,clearCookie:v}=y;const{isBuilder:_,isBroker:b,isSeller:x,uuid:S,name:k,email:C,phone:A,whatsappSubscription:w,userStatus:I}=t||{};if(["inactive","deleted"].includes(I)&&(e((0,c.A)()),"deleted"===I&&((0,i.SO)("crfData",void 0),v("_ga"))),e({type:"SET_LOGIN_PARAM",payload:{...t,attempted:!0}}),!S)return;const{cookies:{hasLoginAuth:T,_ga:P},filters:{service:E,category:O,selectedCity:U},routeParams:{url:j,params:B}}=m(),N=(0,s.A)(E,O),R=j.includes("user-profile")&&["deactivate","delete"].includes(B?.type),H=U&&U.name;e((0,l.E)(t)),"subscribed"===w&&e({type:"SET_APP_STATE",payload:{isWhatsappOpted:!0}}),R&&r&&(0,i.SO)("lastVisitUserRemoval","login"),d&&((0,i.SO)("oneTapLogin",p),e((0,n.track)({label:p?"one_tap_google":"",generic1:u,oneTapLogin:p,...p&&{source:g?"google_onetap_cta":"login"}},"SIGN_IN_SUCCESS","GA",o.A)),e((0,n.track)({label:p?"one_tap_google":""},"SIGN_IN_SUCCESS_MOENGAGE","MO",o.A)));const L="subscribed"===w;if(e({type:"SET_APP_STATE",payload:{isWhatsappOpted:L}}),(e=>{let{uuid:t,email:r,phone:a,name:n,cityName:i,serviceType:s,isWhatsappOpted:o,_ga:l}=e;"undefined"!=typeof Moengage&&(Moengage.add_unique_user_id(t),Moengage.add_email(r),Moengage.add_mobile(a),Moengage.add_user_name(n),Moengage.add_user_attribute("Search City",i),Moengage.add_user_attribute("Service",s),Moengage.add_user_attribute("Product Type","home_search"),Moengage.add_user_attribute("Housing_GAID",l),Moengage.add_user_attribute("whatsapp_optin",o?1:0))})({uuid:S,email:C,phone:A,name:k,cityName:H,serviceType:N,isWhatsappOpted:L,_ga:P}),!T&&f(),r){const{routeParams:{query:e={}}}=m();if(e.redirectTo){const t=e.redirectTo,r={...e};return delete r.redirectTo,delete r.step,h.push(`${t}?${a.stringify(r)}`)}if(_||b||x)return void(window.location.href="https://seller.housing.com/my-listings");h.push("/")}return t}}},66766:(e,t,r)=>{r.d(t,{A:()=>p});var a=r(75641),n=r(11349),i=r(28667),s=r(55713),o=r(92790),l=r(68032),c=r(22014),d=r(44759),u=r(63502);function _extends(){return _extends=Object.assign?Object.assign.bind():function(e){for(var t=1;t<arguments.length;t++){var r=arguments[t];for(var a in r)({}).hasOwnProperty.call(r,a)&&(e[a]=r[a])}return e},_extends.apply(null,arguments)}const p=(0,i.A)({props:(e,t)=>{let{shell:{useragent:{vernac:r,isBot:a,isMobile:n}}={},seo:{linkParams:i},routeParams:{query:s,path:o}={}}=e,{target:l}=t;return{target:l,linkParams:i,query:s,vernac:r,isBot:a,isMobile:n,currUrl:o}},actions:{}})((e=>{let{children:t,href:r,target:i,style:p,linkParams:g={},query:m={},vernac:y,external:h,isBot:f,label:v,className:_,isMobile:b,useDefaultTarget:x=!1,currUrl:S,...k}=e;const C=r?encodeURI(r):r,A=i||(x&&!b?"_blank":"")||g.target,w=t||v,[{isExternal:I=h,externalUrl:T=C,isPhoenixRoute:P=!h,isEdgeRoute:E},O]=(0,a.useState)((()=>({...h?{}:(0,o.t)(C,!!g.target,S),externalUrl:C}))),U=(0,n.useHistory)(),j=I||"undefined"!=typeof window&&(410===window.__STATUS_CODE__||404===window.__STATUS_CODE__);if((0,a.useEffect)((()=>{if(h)return void O({externalUrl:C});const e=(0,o.t)(C,!!g.target,S);O({...e,externalUrl:e.isExternal&&(0,s.A)(C,m)||C})}),[C,g.target,m,h]),!C)return(0,u.jsx)("span",_extends({css:p,className:_},k),w);const B=new RegExp(".*?housing\\.com"+(y?`(\\${y})?`:""));let N=(P||E&&!j)&&T?T.replace(B,""):"";if(f&&P){const{url:e,query:t}=l.parseUrl(N);N=t?l.stringifyUrl({url:e,query:(0,c.U)(t,["p","page"])}):N}if(j){let e=T;return e=(0,d.A)({link:T,vernac:y}),(0,u.jsx)("a",_extends({},g,k,{css:p,className:_,href:P||E&&!j?U.createHref({pathname:N}):e,target:A}),w)}return(0,u.jsx)(n.Link,_extends({},g,k,{css:p,className:_,to:N,target:A}),w)}))},73132:(e,t,r)=>{r.d(t,{A:()=>classNames});var a={}.hasOwnProperty;function classNames(){for(var e=[],t=0;t<arguments.length;t++){var r=arguments[t];if(r){var n=typeof r;if("string"===n||"number"===n)e.push(r);else if(Array.isArray(r)&&r.length){var i=classNames.apply(null,r);i&&e.push(i)}else if("object"===n)for(var s in r)a.call(r,s)&&r[s]&&e.push(s)}}return e.join(" ")}},79839:(e,t,r)=>{r.d(t,{A:()=>g});var a=r(55973),n=r(19097),i=r(75641),s=r.n(i),o=r(89282);r(1814);const l="_26glyw T_removeBackgroundOnLoadStyle";r(52699);var c=r(6039),d=r(82925),u=r(28667),p=r(96628);function _extends(){return _extends=Object.assign?Object.assign.bind():function(e){for(var t=1;t<arguments.length;t++){var r=arguments[t];for(var a in r)({}).hasOwnProperty.call(r,a)&&(e[a]=r[a])}return e},_extends.apply(null,arguments)}const g=(0,u.A)({props:e=>{let{shell:{headers:{unsafeAccept:t}={}}={}}=e;return{unsafeAccept:t}},actions:{},options:{forwardRef:!0}})((0,i.memo)((0,i.forwardRef)(((e,t)=>{let{src:r,alt:a,lazy:u=!0,fetchPriority:g=(u?"low":"auto"),style:m,version:y="medium",className:h,preload:f,onClick:v,onload:_=()=>{},index:b,unsafeAccept:x,supportWebp:S=!0,decoding:k="async",inlineStyle:C,preloadFetchPriority:A="auto",...w}=e;const I=(0,i.useRef)(),[T,P]=(0,i.useState)(!1),E=r&&r.indexOf("base64")>=0;let O=(0,o.Pk)(r);S&&O&&!O.includes("/assets")&&!O.includes(".webp")&&O.includes("housingcdn.com")&&(O=O.replace(".jpg",".jpg.webp"),O=O.replace(".jpeg",".jpeg.webp")),O&&!E&&(O=O.replace("version",y)),(0,c.A)({image:{url:f&&!u&&!E&&O?O:null,preloadFetchPriority:A}}),(0,i.useEffect)((()=>{if((e=I)&&e.current&&e.current.complete&&!T){P(!0);const e=I.current;e&&e.naturalWidth&&e.naturalHeight&&_(b,e.naturalWidth,e.naturalHeight)}var e}),[]);const U=(0,i.useCallback)((e=>{T||P(!0);const t=e.target;t&&t.naturalWidth&&t.naturalHeight?_(b,t.naturalWidth,t.naturalHeight):_(b,1,1)}),[T,b,_]),j=(0,i.useCallback)((()=>{T||P(!0),_(b,1,1)}),[T,b,_]);return s().createElement("img",_extends({},w,{src:O||d,alt:a,ref:(0,p.A)(I,t),loading:u?"lazy":"eager",decoding:k,fetchPriority:g,style:C,className:(0,n.cx)("_26ht90 _jp1dfr T_imgStyle",m,h,T&&l),onClick:v,onLoad:U,onError:j}))}))));(0,a.A)(l)},82925:e=>{e.exports="//c.housingcdn.com/demand/s/client/common/assets/noPhotosFallback.94341155.svg"},86134:(e,t,r)=>{r.d(t,{A:()=>__WEBPACK_DEFAULT_EXPORT__});var a=r(44588),n=r.n(a),i=r(99413),s=r(28525),o=r(21116);const l=i.J`
+  mutation {
+    logout {
+      success
+    }
+  }
+`,__WEBPACK_DEFAULT_EXPORT__=()=>(e,t,r)=>{let{fetch:a}=r;return a({body:{query:l},withCredentials:!0,url:`${n().endPoints.gql}/auth`,apiName:"USER_LOGOUT_API",method:"post"}).catch((e=>e)).then((()=>{if(e({type:"USER_LOGOUT"}),e({type:"CLEAN_P2P"}),e({type:"SET_HOUSING_PREMIUM_DATA",payload:{currentPlan:void 0}}),"undefined"!=typeof window&&window.QBInstance&&window.QBInstance.destroySession(),(0,s.SO)("oneTapLogin"),(0,s.SO)("pocFormData"),"undefined"!=typeof Moengage&&Moengage.destroy_session(),"undefined"!=typeof window){if(window.gapi&&window.gapi.auth2){const e=window.gapi.auth2.getAuthInstance();e&&e.signOut()}if(window.navigator&&window.navigator.credentials){const e=navigator.credentials.preventSilentAccess;e&&e.call(navigator.credentials)}}e((0,o.a)({text:"You have been successfully logged out",type:"success"}))}))}}}]);

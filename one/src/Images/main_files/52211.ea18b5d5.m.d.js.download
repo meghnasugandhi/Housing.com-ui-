@@ -1,0 +1,496 @@
+"use strict";(self.webpackChunkhousing_demand=self.webpackChunkhousing_demand||[]).push([[52211],{37520:(e,t,r)=>{r.d(t,{Jb:()=>fetchRzpConfig,Qx:()=>fetchQrPaymentStatus,lC:()=>getCardNetwork,n$:()=>fetchSavedCards,n1:()=>fetchQrCode,v4:()=>fetchPaymentMethods,wT:()=>checkEligibility});var a=r(99413);const n=a.J`
+  query($orderType: String) {
+    paymentMethods(orderType: $orderType) {
+      desc
+      paymentModes {
+        name
+        code
+        description
+        fullIcon
+        enabled
+        subPaymentModes {
+          name
+          abbreviation
+          code
+          enabled
+          fullIcon
+          smallIcon
+        }
+        extraInfo {
+          darkFullIconUrl
+        }
+      }
+    }
+  }
+`,i=a.J`
+  mutation($cardNumber: String, $orderType: String, $rentType: String) {
+    checkCardNetwork(
+      cardNumber: $cardNumber
+      orderType: $orderType
+      rentType: $rentType
+    ) {
+      network
+      issuerIcon
+      subType
+      type
+      international
+      networkIcon
+    }
+  }
+`,o=a.J`
+  query($groupName: String) {
+    rzpConfig(groupName: $groupName)
+  }
+`,d=a.J`
+  mutation($orderType: String) {
+    savedCards(orderType: $orderType) {
+      customerId
+      apiKey
+      tokens {
+        card {
+          networkIcon
+          last4
+          networkCode
+          type
+          subType
+          international
+        }
+        id
+      }
+    }
+  }
+`,s=a.J`
+  mutation(
+    $orderType: String
+    $amount: Int
+    $providers: [String]
+    $method: String
+    $contactNo: String
+  ) {
+    checkEligibility(
+      orderType: $orderType
+      amount: $amount
+      providers: $providers
+      method: $method
+      contactNo: $contactNo
+    ) {
+      instruments {
+        eligibility {
+          status
+          error {
+            code
+            description
+            reason
+            source
+            step
+          }
+        }
+        method
+        provider
+      }
+      customer {
+        contact
+        id
+      }
+      amount
+    }
+  }
+`,p=a.J`
+  mutation($orderType: String, $transactionId: String) {
+    generateQrCode(orderType: $orderType, transactionId: $transactionId) {
+      closeBy
+      qrCodeDeepLink
+      createdAt
+      id
+    }
+  }
+`,c=a.J`
+  query(
+    $orderType: String
+    $qrId: String
+    $transactionId: String
+    $createdAt: Float
+  ) {
+    qrCodeStatus(
+      orderType: $orderType
+      qrId: $qrId
+      transactionId: $transactionId
+      createdAt: $createdAt
+    ) {
+      data
+      statusCode
+    }
+  }
+`,fetchPaymentMethods=e=>{let{orderType:t}=e;return async(e,r,a)=>{let{fetch:i}=a;try{const e=await i({query:{query:n,variables:JSON.stringify({orderType:t})},cacheType:"network-only",apiName:"FETCH_PAYMENT_METHODS"}),{data:{data:{paymentMethods:r}}={}}=e;return r}catch(e){throw console.error("Error fetching payment methods:",e),e}}},getCardNetwork=function(){let{cardNumber:e}=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};return async(t,r,a)=>{let{fetch:n}=a;const{data:{data:{checkCardNetwork:o}={}}={}}=await n({controller:"CUSTOM_CHECKOUT",apiName:"GET_CARD_NETWORK",method:"POST",cancelPrevious:!0,body:{query:i,variables:JSON.stringify({cardNumber:e,orderType:"TENANT_MONETIZATION"})}});return o}},fetchRzpConfig=()=>async(e,t,r)=>{let{fetch:a}=r;try{const e=await a({query:{query:o,variables:JSON.stringify({groupName:"rzpConfig"})},cacheType:"network-only",apiName:"FETCH_RAZORPAY_CONFIG"}),{data:{data:{rzpConfig:t}}={}}=e;return t}catch(e){throw console.error("Error fetching payment methods:",e),e}},fetchSavedCards=function(){let{orderType:e="TENANT_MONETIZATION"}=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};return async(t,r,a)=>{let{fetch:n}=a;const{data:{data:{savedCards:i}={}}={}}=await n({controller:"CUSTOM_CHECKOUT",apiName:"FETCH_SAVED_CARDS",method:"POST",body:{query:d,variables:JSON.stringify({orderType:e})}}),{customerId:o,apiKey:s,tokens:p}=i||{};return{savedCards:p,customerId:o,apiKey:s}}},checkEligibility=e=>{let{orderType:t="TENANT_MONETIZATION",amount:r,providers:a,method:n,contactNo:i}=e;return async(e,o,d)=>{let{fetch:p}=d;const{data:{data:{checkEligibility:c}={}}={}}=await p({controller:"CUSTOM_CHECKOUT",apiName:"CHECK_ELIGIBILITY",method:"POST",body:{query:s,variables:JSON.stringify({orderType:t,amount:r,providers:a,method:n,contactNo:i})}});return c}},fetchQrCode=e=>{let{orderType:t="TENANT_MONETIZATION",transactionId:r}=e;return async(e,a,n)=>{let{fetch:i}=n;const{data:{data:{generateQrCode:o}={}}={}}=await i({controller:"CUSTOM_CHECKOUT",apiName:"GENERATE_QR_CODE",method:"POST",body:{query:p,variables:JSON.stringify({orderType:t,transactionId:r})}});return o}},fetchQrPaymentStatus=e=>{let{orderType:t="TENANT_MONETIZATION",qrId:r,transactionId:a,createdAt:n}=e;return async(e,i,o)=>{let{fetch:d}=o;try{const e=await d({query:{query:c,variables:JSON.stringify({orderType:t,qrId:r,transactionId:a,createdAt:n})},cacheType:"network-only",apiName:"QR_CODE_STATUS"}),{data:{data:{qrCodeStatus:i}}={}}=e;return i}catch(e){throw console.error("Error fetching QR code status:",e),e}}}},50493:(e,t,r)=>{r.d(t,{QE:()=>n,XX:()=>getActiveScreen,vd:()=>a,zJ:()=>isPartialBlockerEligible});const a="trial-packages",n="normal_packages",getActiveScreen=e=>{let{isSoftBlocker:t}=e;return t?"soft_blocker_packages":n},isPartialBlockerEligible=()=>!1},52211:(e,t,r)=>{r.d(t,{A5:()=>fetchDropOffDiscount,FU:()=>fetchHpConfig,Fd:()=>fetchData,Mb:()=>orderAndInitPay,Mn:()=>fetchTrialPackages,Mt:()=>updateUserProfilePaidStatus,Wh:()=>getAdProductV3LandingPage,Wr:()=>fetchPaymentFailedData,cX:()=>fetchPromiseData,gZ:()=>getAvailableCoupon,kP:()=>getMyTransactions,mN:()=>fetchMlDiscounts,nZ:()=>getLanguageList,os:()=>postAvailabilityDetails,re:()=>postRequirements,vw:()=>fetchGameConfig});var a=r(28525),n=r(99413),i=r(1100);if(23023==r.j)var o=r(50493);var d=r(82024),s=r(94196),p=r(37520);const c=n.J`
+  mutation($orderId: String, $userId: String, $filters: JSON) {
+    hpPostRequirementsV2(
+      orderId: $orderId
+      userId: $userId
+      filters: $filters
+    ) {
+      createdAt
+      orderId
+      updatedAt
+      userId
+      id
+    }
+  }
+`,u=n.J`
+  mutation($orderId: String, $userId: String, $details: availabilityDetails) {
+    postAvailabilityDetails(
+      orderId: $orderId
+      userId: $userId
+      details: $details
+    ) {
+      createdAt
+      orderId
+      updatedAt
+      userId
+      id
+    }
+  }
+`,l=n.J`
+  query {
+    rmLanguages
+  }
+`,y=n.J`
+  query($couponCode: String) {
+    availableCoupons(couponCode: $couponCode) {
+      offerType
+      placeholders {
+        key
+        value
+        keyType
+      }
+      coupons {
+        id
+        code
+        offerId
+        typeId
+        couponStatus
+        metaData {
+          entityId
+          entityType
+          value
+          valueMetric
+        }
+      }
+      validFrom
+      validTo
+    }
+  }
+`,m=n.J`
+  query(
+    $productId: Int
+    $serviceId: Int
+    $couponCode: String
+    $cityUuid: String
+    $profileUuid: String
+    $productType: String
+    $softBlock: Boolean
+    $experiment: String
+    $sachetExperiment: String
+    $promiseExperiment: Boolean
+    $newUserHeader: Boolean
+    $premiumDiscountCapExp: String
+  ) {
+    tenantAdProductV3(
+      productId: $productId
+      serviceId: $serviceId
+      couponCode: $couponCode
+      cityUuid: $cityUuid
+      profileUuid: $profileUuid
+      productType: $productType
+      softBlock: $softBlock
+      experiment: $experiment
+      sachetExperiment: $sachetExperiment
+      promiseExperiment: $promiseExperiment
+      newUserHeader: $newUserHeader
+      premiumDiscountCapExp: $premiumDiscountCapExp
+    ) {
+      tenantPackages {
+        icon
+        benefits
+        displayPrice
+        ownerContactLimit
+        allowedOwnerLead
+        offeredPrice
+        productId
+        fallbackProductId
+        packageName
+        experimentStatus
+        isPopular
+        validity
+        isRmEnabled
+        isHighestPackage
+        plansBought
+        duration
+        trial
+        rmIcon
+        goldenTagInfo
+        productTypeName
+        isSachetOnLp
+        tagDetails {
+          header
+          icon
+          type
+        }
+        surpriseEnabled
+        maxCouponPercentage
+        packageServiceId
+        isBuyButtonDisabled
+      }
+      timerDiscounts {
+        id
+        discountDetails {
+          text
+          value
+          metric
+        }
+        duration
+        color
+        mweb_text
+        text
+      }
+      timerDiscountsRevamp {
+        text
+        subText
+        id
+        discountDetails {
+          value
+          metric
+        }
+      }
+      trialHeroCopy
+      additionalBenefits
+      lpHeroCopy
+      blockerHeroCopy
+      telesalesHeaderCopy
+      staticHeroCopy
+    }
+  }
+`,g=(n.J`
+  mutation($user: UserInput) {
+    requestCallback(user: $user) {
+      success
+    }
+  }
+`,n.J`
+  mutation(
+    $user: UserInput
+    $ownerOrBrokerNudge: String
+    $paymentDetail: PaymentInput
+    $productId: Int
+    $opportunityId: Int
+    $serviceType: String
+    $cityUuid: String
+    $couponCode: String
+    $cityName: String
+    $locationEntity: String
+    $locationEntityType: String
+    $purchaseChannel: String
+    $deepDiscountFlag: Boolean
+    $offerId: Int
+    $discountId: Int
+    $paywallDropOffApplied: Boolean
+    $hpBundlingValues: [String]
+    $gamificationOrder: Boolean
+    $gameOfferId: Int
+    $isMlDiscountApplied: Boolean
+    $surpriseAdded: Boolean
+    $progressiveDiscountEnabled: Boolean
+    $premiumDiscountCapExp: String
+  ) {
+    orderAndInitPay(
+      user: $user
+      ownerOrBrokerNudge: $ownerOrBrokerNudge
+      paymentDetail: $paymentDetail
+      productId: $productId
+      opportunityId: $opportunityId
+      serviceType: $serviceType
+      cityUuid: $cityUuid
+      couponCode: $couponCode
+      cityName: $cityName
+      locationEntity: $locationEntity
+      locationEntityType: $locationEntityType
+      purchaseChannel: $purchaseChannel
+      deepDiscountFlag: $deepDiscountFlag
+      offerId: $offerId
+      discountId: $discountId
+      paywallDropOffApplied: $paywallDropOffApplied
+      hpBundlingValues: $hpBundlingValues
+      gamificationOrder: $gamificationOrder
+      gameOfferId: $gameOfferId
+      isMlDiscountApplied: $isMlDiscountApplied
+      surpriseAdded: $surpriseAdded
+      progressiveDiscountEnabled: $progressiveDiscountEnabled
+      premiumDiscountCapExp: $premiumDiscountCapExp
+    ) {
+      apiKeyId
+      amount
+      currency
+      rpOrderId
+      orderId
+      payer {
+        name
+        email
+        phone {
+          value
+        }
+      }
+      entityId
+      errors
+      userFeedbackEnabled
+      deepDiscountEnabled
+      transactionId
+    }
+  }
+`),T=n.J`
+  query($paging: PageInfoInput!, $filters: [TransactionFilter]) {
+    myTransactionsV2(paging: $paging, filters: $filters) {
+      transactions {
+        orderId
+        orderType
+        transactionId
+        paymentDetails {
+          amount
+          status {
+            description
+            id
+          }
+        }
+        paymentResponse {
+          gatewayPaymentId
+        }
+        surpriseStatus
+      }
+    }
+  }
+`,I=(n.J`
+  query {
+    gstDetails
+  }
+`,n.J`
+  query {
+    hpConfig
+  }
+`),f=(n.J`
+  query {
+    hpVendorOffers
+  }
+`,n.J`
+  query($phone: String) {
+    userRemainingLeadsCount(phone: $phone) {
+      nonPaidOwnerResale
+      nonPaidOwnerRent
+    }
+  }
+`,n.J`
+  query(
+    $oldOrderId: String!
+    $orderTypeId: Int!
+    $variant: String
+    $premiumDiscountCapExp: String
+  ) {
+    dropOffDiscount(
+      oldOrderId: $oldOrderId
+      orderTypeId: $orderTypeId
+      variant: $variant
+      premiumDiscountCapExp: $premiumDiscountCapExp
+    ) {
+      titleText
+      titleImage
+      titleSubText
+      titleSubTextIcon
+      offerExpireTimer
+      offerAmount
+      discountAmount
+      discountPercentage
+      buttonTitleText
+      buttonSubText
+      userEligible
+    }
+  }
+`),E=(n.J`
+  query($orderTypeId: Int) {
+    edgeTestimonials(orderTypeId: $orderTypeId) {
+      name
+      city
+      ratings
+      image
+      content
+      type
+      subtitle
+      createdAt
+      extraFields
+    }
+  }
+`,n.J`
+  query($orderTypeId: Int) {
+    edgeMediaCoverage(orderTypeId: $orderTypeId) {
+      featuredOn
+      headline
+      publicationLogo
+      linkText
+      link
+    }
+  }
+`,n.J`
+  query($orderTypeId: Int, $featureId: Int) {
+    edgeFaqV4(orderTypeId: $orderTypeId, featureId: $featureId)
+  }
+`),h=n.J`
+  query($orderTypeId: Int, $cityUuid: String) {
+    mlDiscount(orderTypeId: $orderTypeId, cityUuid: $cityUuid) {
+      discount
+    }
+  }
+`,_=n.J`
+  query($phone: String) {
+    paymentFailedConfig(phone: $phone) {
+      popup {
+        boldTitle
+        cta
+        description
+        firstTitle
+        frequency
+        icon
+        trailingDays
+      }
+      paymentFailed
+      nudge {
+        cta
+        description
+        frequency
+        icon
+        trailingDays
+      }
+    }
+  }
+`,getProductType=(e,t,r)=>"paying_guest"===e&&"hp-blocker"===t?"PG":"trial-packages"===t?"TRIAL":"housing-promise-nudge"===t?"PROMISE_V2":"hp-telesales-landing"===t?"TELESALES":"gamification"===t?r:t===d.Hl.RM_ASSISTANT_PLAN?"RM_ASSIST":"NORMAL",getAdProductV3=function(e,t){let r=arguments.length>2&&void 0!==arguments[2]?arguments[2]:"",a=arguments.length>3?arguments[3]:void 0;return(n,i,o)=>{let{fetch:d}=o;const{routeParams:{query:{productId:s}={}}={},filters:{selectedCity:{id:p}={},category:c}={},login:{uuid:u}={}}=i();let l={serviceId:"buy"===t?2:"rent"===t?1:void 0,couponCode:r,cityUuid:p||"",profileUuid:u||"",productType:getProductType(c,e,a)};return"PG"!==getProductType(c,e)&&(l={...l,experiment:"variantA"}),"direct_link"===e&&(l={...l,productId:parseInt(s)}),"hp-soft-blocker"===e&&(l={...l,softBlock:!0}),l=JSON.stringify({...l}),d({apiName:"GET_AD_PRODUCT_V2",cacheType:"network-only",query:{query:m,variables:l}}).then((e=>{let{data:{data:{tenantAdProductV3:{tenantPackages:t=[],timerDiscounts:r,additionalBenefits:a,trialHeroCopy:n}={}}={}}={}}=e;return{tenantPackages:t,timerDiscounts:r,additionalBenefits:a,trialHeroCopy:n}}))}},getAdProductV3LandingPage=function(e){let t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:"rent",r=arguments.length>2?arguments[2]:void 0;return(a,n,o)=>{let{fetch:s}=o;const{routeParams:{query:{productId:p,showTM:c}={},params:{packageId:u}={}}={},filters:{selectedCity:{id:l}={},category:y}={},login:{uuid:g}={},housingPremium:{isExclusivePage:T}={},cookies:{ssrExperiments:{hp_9163:I}={}}={}}=n(),f="true"===c&&"hp-blocker"===e,E="PG"===getProductType(y,e);let h=["housing-premium-landing","hp-telesales-landing"].includes(e)?l:null;"undefined"==typeof window||h||(h=(0,i.R)("userCity"));let _={serviceId:"buy"===t?2:"rent"===t?1:void 0,cityUuid:h||l||null,profileUuid:g||null,productType:getProductType(y,e)};return"PG"===getProductType(y,e)||"hp-telesales-landing"===e&&T||(_={..._,experiment:"variantD"}),"NORMAL"===getProductType(y,e)&&(_={..._,sachetExperiment:"variantC"}),E&&(_={..._,sachetExperiment:"variantB"}),"DIRECT_LINK"===e&&(_={..._,productId:parseInt(p)}),r&&(_={..._,experiment:"variantB"}),e===d.Hl.RM_ASSISTANT_PLAN&&(_={..._,experiment:"variantA"}),e===d.Hl.PROMISE_REVAMPED?_={..._,promiseExperiment:!0}:_.premiumDiscountCapExp=d.Qd[I]||"default",f&&(_={..._,newUserHeader:!0}),_=JSON.stringify({..._}),s({apiName:"GET_AD_PRODUCT_V3",cacheType:"network-only",query:{query:m,variables:_}}).then((e=>{let{data:{data:{tenantAdProductV3:t}={}}={}}=e;const{tenantPackages:r=[],timerDiscounts:a,additionalBenefits:n,blockerHeroCopy:i,lpHeroCopy:o,telesalesHeaderCopy:d,timerDiscountsRevamp:s,staticHeroCopy:p}=t||{};if(!u||r&&r.length&&"NORMAL"===r[0].productTypeName)return{tenantPackages:r,timerDiscounts:a,additionalBenefits:n,blockerHeroCopy:i,lpHeroCopy:o,telesalesHeaderCopy:d,timerDiscountsRevamp:s,staticHeroCopy:p};window.location.href="/premium"}))}},getAvailableCoupon=e=>(t,r,a)=>{let{fetch:n}=a,i=JSON.stringify({couponCode:e});return n({apiName:"GET_AVAILABLE_COUPON",cacheType:"network-only",query:{query:y,variables:i}}).then((e=>{let{data:{data:{availableCoupons:t=[]}={}}={}}=e;return t}))},orderAndInitPay=function(e,t,r,n,o,p,c,u,l,y,m,T,I,f,E,h,_){let N=arguments.length>17&&void 0!==arguments[17]?arguments[17]:[],$=arguments.length>18&&void 0!==arguments[18]?arguments[18]:"";return(A,C,O)=>{let{fetch:S}=O;const{routeParams:{query:{opportunityId:v}}={},filters:{service:D,category:P,selectedCity:{id:b}={}}={},cookies:{experiments:{edge_hp_surprise_gift:R}={},ssrExperiments:{hp_9163:k}={}}={}}=C(),q=(0,i.R)("userCity")||b||null,M=(0,i.R)("cityUrl"),U=(0,a.Gq)("recently_searched")||[],{cityName:w,entities:x=[]}=U.length?U[0]:{},{name:H,type:G}=x.length?x[0]:{};"paying_guest"===P&&(u="pg");const{curatedProperties:B,moneyBackGuarantee:J}=I||{},L=[];B&&L.push("CURATED_PROPERTIES"),J&&L.push("MONEYBACK_GUARANTEE");const F=(0,s.gb)(N,n);return S({apiName:"ORDER_AND_INITIATE_PAYMENT",method:"post",body:{query:g,variables:{user:e,ownerOrBrokerNudge:t,paymentDetail:r,productId:n,opportunityId:"direct_link"===o?parseInt(v):void 0,serviceType:u||D,cityUuid:q,couponCode:p?p.code:"",cityName:M||w,locationEntity:H,locationEntityType:G,purchaseChannel:c,deepDiscountFlag:l,offerId:y,discountId:m,paywallDropOffApplied:T,hpBundlingValues:L,gameOfferId:f,gamificationOrder:E,isMlDiscountApplied:h>0,surpriseAdded:"true"===R&&_&&"paying_guest"!==P,progressiveDiscountEnabled:F,..."promise-nudge"!==$&&{premiumDiscountCapExp:d.Qd[k]||"default"}}}}).then((e=>{let{data:{data:{orderAndInitPay:t}}}=e;return t}))}},getMyTransactions=e=>async(t,r,a)=>{let{fetch:n}=a;const i=[{key:"id",value:e,type:"equal"}],{data:{data:{myTransactionsV2:o}}={}}=await n({apiName:"FETCH_MY_TRANSACTIONS",timeout:1e4,controller:"RENT_PAY",query:{query:T,variables:JSON.stringify({paging:{page:0,size:1},filters:i})}}),{transactions:d=[]}=o||{};return d},postRequirements=(e,t,r)=>(a,n,i)=>{let{fetch:o}=i;return o({apiName:"POST_REQUIREMENT_API",method:"post",body:{query:c,variables:{orderId:e,userId:t,filters:r}}}).then((e=>{let{data:{data:{hpPostRequirementsV2:t}}}=e;return t}))},postAvailabilityDetails=(e,t,r)=>(a,n,i)=>{let{fetch:o}=i;return o({apiName:"POST_AVAILABILITY_API",method:"post",body:{query:u,variables:{orderId:e,userId:t,details:r}}}).then((e=>{let{data:{data:{postAvailabilityDetails:t}}}=e;return t}))},getLanguageList=()=>(e,t,r)=>{let{fetch:a}=r;return a({apiName:"GET_LANGUAGE",method:"GET",query:{query:l}}).then((t=>{let{data:{data:{rmLanguages:r=[]}}}=t;r=r.map((e=>{let{id:t,displayName:r}=e;return{id:t,name:r,url:r}})),e({type:"SET_HOUSING_PREMIUM_DATA",payload:{rmLanguages:r}})}))},updateUserProfilePaidStatus=e=>t=>{t({type:"SET_LOGIN_PARAM",payload:{isPaidProfile:e}})},fetchHpConfig=()=>async(e,t,r)=>{let{fetch:a}=r;const{data:{data:{hpConfig:n}={}}={}}=await a({apiName:"FETCH_HP_CONFIG",timeout:1e4,controller:"FETCH_HP_CONFIG",method:"GET",query:{query:I}});return n||{}},fetchDropOffDiscount=e=>{let{oldOrderId:t,orderTypeId:r,enablePremiumDiscountCapExp:a=!1}=e;return async(e,n,i)=>{let{fetch:o}=i;const{cookies:{ssrExperiments:{hp_9163:s}={}}={}}=n(),p={oldOrderId:t,orderTypeId:r,variant:"v1",...a&&{premiumDiscountCapExp:d.Qd[s]||"default"}},{data:{data:{dropOffDiscount:c={}}={}}={}}=await o({apiName:"DROPOFF_DISCOUNT",controller:"DROPOFF_DISCOUNT",METHOD:"GET",query:{query:f,variables:JSON.stringify(p)}});return c}},fetchTrialPackages=()=>async(e,t,r)=>{let{fetch:a}=r;const{filters:{service:n}}=t(),i=[e(getAdProductV3(o.vd,n)),e(fetchHpConfig()),e(getFaq(3))];return Promise.all(i).then((t=>{let[r={},a={}]=t;const{tenantPackages:n=[],trialHeroCopy:i}=r,{gst:o}=a||{},{value:d,valueType:s}=o||{},p={trialPackages:n,trialHeroCopy:i,gstDetails:{...o||{},gstRate:"PERCENT"===s?`${d}%`:`₹${d}`},config:a};e({type:"SET_HOUSING_PREMIUM_DATA",payload:p})}))},fetchData=function(){return async(e,t,r)=>{let{fetch:a}=r;const n=[e(fetchHpConfig()),e((0,p.Jb)()),e(getFaq(3))];return Promise.all(n).then((t=>{let[r={},a={}]=t;const{gst:n}=r||{},{value:i,valueType:o}=n||{},d={config:r,rzpConfig:a,gstDetails:{...n||{},gstRate:"PERCENT"===o?`${i}%`:`₹${i}`}};e({type:"SET_HOUSING_PREMIUM_DATA",payload:{...d}})}))}},getFaq=(e,t)=>async(r,a,n)=>{let{fetch:i}=n;const o=await i({method:"get",apiName:"GET_EDGE_FAQ_V4",query:{query:E,variables:JSON.stringify({orderTypeId:e,featureId:t})}}),{data:{data:d}={}}=o,{edgeFaqV4:s}=d||{},{TENANT_MONETIZATION:{faqs:p=[]}={}}=s||{};r({type:"SET_HOUSING_PREMIUM_DATA",payload:{faqsData:parseFaqs(p)}})},parseFaqs=e=>(e.forEach((e=>{const{a:t}=e;(t.match(/(https?:\/\/[^\s]+)/g)||[]).forEach((r=>{e.a=t.replace(r,`<u><a href=${r} style="color:#5e23dc;">${r}</a></u>`)}))})),e),fetchPromiseData=function(){let{isV2:e,service:t}=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};return async(r,a,n)=>{let{fetch:i}=n;const{filters:{service:o}}=a(),s=[r(e?getAdProductV3LandingPage(d.Hl.PROMISE_REVAMPED,t):getAdProductV3("housing-promise-nudge",o)),r(fetchHpConfig()),r(e?getFaq(3):getFaq(3,3))];return Promise.all(s).then((e=>{let[t,a={}]=e;const{tenantPackages:n,timerDiscounts:i,additionalBenefits:o}=t||{},{PaywallDropOffDiscount:{value:d}={},gst:s}=a,{value:p,valueType:c}=s||{},{discount:u,time:l}=d?JSON.parse(d):{},y={promiseData:{tenantPackages:n,timerDiscounts:i,paywallDropOffDiscount:u,paywallDropOffTime:l,gstDetails:{...s||{},gstRate:"PERCENT"===c?`${p}%`:`₹${p}`}},additionalBenefits:o,config:a};r({type:"SET_HOUSING_PREMIUM_DATA",payload:y})}))}},N=n.J`
+  query {
+    hpGameConfig {
+      headerSubText
+      headerTextImageUrl
+      displayOffers {
+        text1
+        text2
+        id
+        offerType
+      }
+      exitIntentV2 {
+        footerText
+        subTitleText
+        titleText
+        webFooterText
+      }
+      desktopConfig {
+        benefits
+        headerImageUrl
+        titleText
+      }
+      showGamificationDiscountPercentage
+      gamificationEnabled
+    }
+  }
+`,fetchGameConfig=()=>async(e,t,r)=>{let{fetch:a}=r;const{data:{data:{hpGameConfig:n}={}}={}}=await a({apiName:"FETCH_GAME_CONFIG",controller:"FETCH_GAME_CONFIG",method:"GET",query:{query:N}});return e({type:"SET_HOUSING_PREMIUM_DATA",payload:{gamificationConfig:n}}),n},fetchMlDiscounts=e=>{let{orderTypeId:t}=e;return async(e,r,a)=>{let{fetch:n}=a;const{filters:{selectedCity:{id:o}={}}={}}=r(),d=(0,i.R)("userCity")||o||null,s={orderTypeId:t,cityUuid:d},{data:{data:{mlDiscount:p={}}={}}={}}=await n({apiName:"ML_DISCOUNT",controller:"ML_DISCOUNT",METHOD:"GET",query:{query:h,variables:JSON.stringify(s)}});return e({type:"SET_HOUSING_PREMIUM_DATA",payload:{mlDiscountApplied:p.discount}}),p}},fetchPaymentFailedData=()=>async(e,t,r)=>{let{fetch:a}=r;const{login:{phone:n}={}}=t(),{data:{data:{paymentFailedConfig:i}={}}={}}=await a({apiName:"PAYMENT_FAILED_DATA",controller:"PAYMENT_FAILED_DATA",method:"GET",query:{query:_,variables:JSON.stringify({phone:n})}});return i}},76127:(e,t,r)=>{r.d(t,{A:()=>a});const a={USER:"User",OWNER:"Owner",BUILDER:"Developer",BROKER:"Agent"}},82024:(e,t,r)=>{r.d(t,{Hl:()=>a,Qd:()=>s,UC:()=>n,jm:()=>i,vA:()=>o,y_:()=>d});const a={PROMO:"promo",BLOCKER:"blocker",DASHBOARD:"dashboard",LANDING_PAGE:"landing-page",TELESALES_LANDING_PAGE:"hp-telesales-landing",PG_BLOCKER:"pg-blocker",RM_ASSISTANT_PLAN:"rm-assistant-plan",PROMISE_REVAMPED:"promise-nudge-revamped",DIRECT_LINK:"direct_link"},n={LAST_SELECTED_PACKAGE:"hp-payment-attempt-info",LAST_PAYMENT_ATTEMPT_INFO:"hp-payment-attempt"},i=["serp","post_crf_owner","post_crf_seller","post_crf_agent","post_crf_developer","pdp","home","home_bottom_nav_bar","profile_page_quick_links","home_header","home_page","profile_page_housing_edge","edge_landing_page_other_services","edge_landing_page_main_section","premium_filters","pdp_edge","edge_page_all_services"],o={HP_PAYMENT_CONTINUE_NUDGE:"hp_payment_continue_nudge",HP_PAYMENT_CONTINUE_POPUP:"hp_payment_continue_popup"},d={CURATED:"curated"},s={varA:"variantA",varB:"variantB",varC:"variantC"}},94196:(e,t,r)=>{r.d(t,{Wf:()=>getProfileTypeIfOwnerOrBroker,dM:()=>getActualCouponDiscountValue,f3:()=>getValidity,gb:()=>isProgressiveDiscountEnabled});var a=r(76127),n=r(82024);const getProfileTypeIfOwnerOrBroker=(e,t,r,n)=>{if(r)return null;if(!n)return null;const i=[...t||[],e];return i.includes(a.A.OWNER)?a.A.OWNER:i.includes(a.A.BROKER)?"Broker":void 0};function getValidity(e){let{source:t,service:r}=e;return t!==n.Hl.LANDING_PAGE&&"buy"===r?"higherValidity":"lowerValidity"}const getActualCouponDiscountValue=e=>{let{couponDetails:t,maxCouponPercentage:r,displayPrice:a}=e;const{value:n,valueMetric:i}=t||{};if("PERCENT"===i){const e=r>n?n:r;return Math.ceil((100-e)*a/100)}return a-n},isProgressiveDiscountEnabled=(e,t)=>{const r=e.find((e=>e.productId===t));return r&&r.maxCouponPercentage<100}}}]);

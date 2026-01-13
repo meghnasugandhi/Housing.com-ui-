@@ -1,0 +1,61 @@
+"use strict";(self.webpackChunkhousing_demand=self.webpackChunkhousing_demand||[]).push([[44830],{16631:(e,t,r)=>{r.d(t,{default:()=>h});var s=r(75641),i=r(28667),a=r(47651),o=r(29446);const n={CARD_CLICK_TRACK_HOME:(e,t)=>{const{key:r,item:{propertyType:s="",listingId:i="",key:a,data:{listingId:n=i,propertyType:l=s}={},id:d=""}={}}=t;return{category:(0,o.A)(r),action:"card_clicked",dimensions:{listingId:n,collectionId:a,serviceType:l,sellerId:d}}}};var l=r(78580),d=r(58727),p=r(42835),c=r(36270),y=r(48059),u=r(63502);function _extends(){return _extends=Object.assign?Object.assign.bind():function(e){for(var t=1;t<arguments.length;t++){var r=arguments[t];for(var s in r)({}).hasOwnProperty.call(r,s)&&(e[s]=r[s])}return e},_extends.apply(null,arguments)}const m=(0,l.A)((()=>Promise.all([r.e(99276),r.e(4899)]).then(r.bind(r,84692))),{fallback:(0,u.jsx)(d.p,{height:"125px",width:"268px"}),type:"local",container:"housing.demand",module:"shared/components/Home/Cards/FeaturedDeveloper/mobile"}),g=(0,l.A)((()=>Promise.all([r.e(99276),r.e(79951)]).then(r.bind(r,58608))),{fallback:(0,u.jsx)(d.p,{height:"457px",width:"314px",style:p.A8}),type:"local",container:"housing.demand",module:"shared/components/Home/Cards/FeaturedDeveloper/desktop"}),h=(0,i.A)({props:(e,t)=>{let{shell:{useragent:{isMobile:r}={}}={},meta:{featuredDevelopers:s},filters:{selectedCity:{name:i}={}}}=e;return{isMobile:t.hasOwnProperty("isMobile")?t.isMobile:r,featuredDevelopers:s,city:i}},actions:{fetchCountryFeaturedDevelopers:y.A}})((0,s.memo)((e=>{let{isMobile:t,...r}=e;const{Section:i,title:o,subTitle:l,key:d,itemKey:p,featuredDevelopers:y=[],loader:h,showLoader:x,onClick:f,city:b,tag:v,isBuyOrRentHome:A,fetchCountryFeaturedDevelopers:C=()=>{},cardProps:_={}}=r,k=(0,a.A)(n);return(0,s.useEffect)((()=>{A||b||t||C()}),[]),y&&y.length?t?(0,u.jsx)(m,_extends({},r,{onClick:e=>{!f&&k("CARD_CLICK_TRACK_HOME",{key:"featured_developers",item:e}),f&&f(e)}})):x?h:(0,u.jsx)(i,{title:o,subTitle:l,key:d,itemKey:p,tag:v},(0,u.jsx)(c.default,_extends({card:g},r,{cardProps:{..._,city:b},data:y||[]}))):null})))},42835:(e,t,r)=>{r.d(t,{A8:()=>y,MK:()=>d,QS:()=>l,bP:()=>n,kt:()=>c,q6:()=>p});var s=r(63502),i=r(26541),a=r(66570),o=r(95777);const n=(0,s.css)("display:block;width:314px;padding:16px 0 20px;border:solid 1px #e6e6e6;border-top:solid 4px ",o.A.primary,";border-radius:4px;cursor:pointer;transition:0.5s;&:hover{box-shadow:0 6px 12px 0 rgba(0,0,0,0.15);}"),l={name:"1erxk2b",styles:"margin:0 20px;"},d=(0,s.css)("margin:20px 20px 0;font-size:14px;line-height:21px;opacity:0.5;height:63px;",(0,a.zi)(3)," @media (",i.hf,"){font-size:14.5px;}"),p={name:"1hyfx7x",styles:"display:none;"},c={name:"bhfvww",styles:"margin:16px 0 16px 18px;.tab-item{max-width:calc(45% - 20px);margin-right:10px;}"},y={name:"1erxk2b",styles:"margin:0 20px;"}},48059:(e,t,r)=>{r.d(t,{A:()=>__WEBPACK_DEFAULT_EXPORT__});const s=r(99413).J`
+  fragment Pr on Property {
+    listingId
+    propertyType
+    title
+    displayPrice {
+      displayValue
+      value
+    }
+    address {
+      address
+    }
+
+    promotions
+    brands {
+      name
+    }
+    url
+    coverImage {
+      src
+    }
+  }
+  fragment DP on Property {
+    ...Pr
+    details {
+      config {
+        propertyConfig {
+          key
+          label
+        }
+      }
+    }
+  }
+  query($service: String!, $category: String!, $isBot: Boolean!) {
+    allCitiesData(service: $service, category: $category) {
+      topCitiesProjects @include(if: $isBot) {
+        id
+        name
+        properties {
+          ...DP
+        }
+      }
+      featuredDevelopers {
+        id
+        name
+        description
+        image
+        url
+        type
+        designation
+        stats {
+          label
+          description
+        }
+        properties {
+          ...DP
+        }
+      }
+    }
+  }
+`,__WEBPACK_DEFAULT_EXPORT__=()=>(e,t,r)=>{let{fetch:i}=r;const{shell:{useragent:{isBot:a}},filters:{service:o,category:n}={}}=t();return i({apiName:"ALL_CITIES_DATA_API",cacheType:"stale",query:{query:s,variables:JSON.stringify({category:n,service:o,isBot:!!a})}}).then((t=>{let{data:{data:{allCitiesData:r}}}=t,{structuredData:s,...i}=r||{};return s&&e({type:"SET_SEO_PARAM",payload:{structuredData:s}}),e({type:"UPDATE_META_DATA",payload:i}),i}))}}}]);

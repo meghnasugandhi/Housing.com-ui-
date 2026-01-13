@@ -1,0 +1,499 @@
+"use strict";(self.webpackChunkhousing_demand=self.webpackChunkhousing_demand||[]).push([[98502],{1050:(e,t,r)=>{r.d(t,{u:()=>fetchExtraCardsFallback});var a=r(59085),s=r(99413),i=r(37212),o=r(66144);const l=s.J`
+  query(
+    $pageInfo: PageInfoInput
+    $city: CityInput
+    $hash: String!
+    $service: String!
+    $category: String!
+    $meta: JSON
+    $bot: Boolean!
+    $fltcnt: String
+  ) {
+    extraCards(
+      hash: $hash
+      service: $service
+      category: $category
+      city: $city
+      pageInfo: $pageInfo
+      meta: $meta
+      fltcnt: $fltcnt
+      bot: $bot
+    )
+  }
+`;var n=r(61887),c=r(20261);var d=r(16411);s.J`
+  query($service: String!, $category: String, $city: CityInput!) {
+    popularLocalities(service: $service, category: $category, city: $city) {
+      name
+      id
+      overviewPageUrl
+      growthRate
+      price {
+        displayValue
+        unit
+      }
+      center
+    }
+  }
+`;var p=r(27982);const u={default:58,serp:60,serpRhs:61,home:59,dedicated:62},y=s.J`
+  query(
+    $placeholderId: Int
+    $poly: String
+    $slotId: Int
+    $domain: Int
+    $service: String
+    $source: String
+  ) {
+    allianceDetails(
+      placeholderId: $placeholderId
+      poly: $poly
+      slotId: $slotId
+      domain: $domain
+      service: $service
+      source: $source
+    ) {
+      error
+      hooks {
+        slotId
+        template
+        offers
+        offer
+        title
+        subtitle
+        adSlotPosition
+        cta
+        heroImage
+        brandImage
+        brandUrl
+        brandUrlLabel
+        brandName
+        bannerImage
+        terms
+        url
+      }
+    }
+  }
+`,g=s.J`
+  query(
+    $entities: [RealEstateEntityInput!]
+    $filters: JSON
+    $meta: JSON
+    $count: Int
+    $service: String
+    $category: String
+    $saleType: String
+  ) {
+    fixedAdSlot(
+      entities: $entities
+      filters: $filters
+      meta: $meta
+      count: $count
+      service: $service
+      category: $category
+      saleType: $saleType
+    ) {
+      listingId
+      title
+      url
+      brands {
+        name
+      }
+      address {
+        address
+      }
+      promotions
+      subtitle
+      displayPrice {
+        displayValue
+        value
+      }
+      coverImage {
+        src
+      }
+      propertyType
+      sellers {
+        name
+        id
+        designation
+        phone {
+          partialValue
+        }
+      }
+      details {
+        config {
+          propertyConfig {
+            key
+            label
+          }
+        }
+        propertyConfigs {
+          id
+          icon
+          label
+          description
+          meta
+          showOnMobile
+          mobileLabel
+          formattedDescription
+        }
+      }
+      description {
+        overview
+      }
+      features {
+        label
+        description
+        id
+      }
+      featureAndConfig {
+        id
+        description
+        label
+      }
+    }
+  }
+`;var h=r(99466),m=r(21108);const getFiltersMeta=e=>{let{routeParams:{query:{listingId:t,dc_uuid:r}={},params:{product:a,type:s=a,listingId:i=t}}}=e();return["project","projects","resale","rent"].includes(s)?{[`qv_${"projects"===s?"project":s}_id`]:i}:{...r&&{city_select_uuid:r}}},getFeaturedProperties=(e,t)=>e.reduce(((e,r)=>{const a=r.properties.map((e=>{let{id:r}=e;return t[r]}));switch(r.type){case"showcase":case"upper-showcase":e.upperShowCase=a;break;case"lower-showcase":e.lowerShowCase=a}return e}),{}),fetchExtraCardsFallback=function(){let{cardName:e,name:t,limit:r,maintainPosition:s,type:f,seenPropertyIds:v,from:S}=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};return async(s,b)=>{let P,{filters:{selectedCity:A,pageInfo:{page:T=1}={},service:I,category:$},routeParams:{query:{page:C=T,event:k,slot_id:E,explain:_,fltcnt:x="",filter:D=""},path:w,params:{hash:L}={}}={},searchResults:{data:N,promotedProperties:U}={}}=b();const q=(0,a.A)(I,$),R=["buy","rent"].includes(q);let M={hash:L,service:I,category:$,city:A,pageInfo:{page:C,size:20},meta:{event:k,slotId:E,filterMeta:getFiltersMeta(b),explain:_,url:w,pagination_flow:!1,enableExperimentalFlag:!1},bot:!1,fltcnt:x,isRent:"rent"===q,isLandmarkSearchActive:R,interestLedFilter:D};switch(t){case"nearbyLocalitiesLandmark":P=await s(((e,t)=>{let{routeParams:{params:{hash:r}}}=t();if(!r)return Promise.resolve();const{entities:a=[]}=(0,n.A)({hash:r});return e((0,c.A)({entities:a})).then((t=>(e({type:"UPDATE_META_DATA",payload:{nearbyLocalities:t}}),t)))}));break;case"popularLocalitiesLandmark":P=await s(((e,t)=>{let{filters:{selectedCity:r,service:a}={}}=t();return e((0,d.b$)({featureType:"popular",cityUuid:r?.id,service:a,overviewUrlRequired:!0})).then((function(){let{data:t=[]}=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};return e({type:"UPDATE_META_DATA",payload:{popularLocalities:t}}),t})).catch((e=>{throw e}))}));break;case"housingStories":P=await s((0,m.q0)({type:"stories"})),P&&P?.length||(P=null);break;case"housingShorts":P=await s((0,m.q0)({type:f,seenPropertyIds:v,from:S})),P&&P?.length||(P=null);break;case"searchAlliances":const e=await s(((e,t,r)=>(a,s,i)=>{let{fetch:o}=i;const{filters:{selectedCity:{id:l,cityId:n},entities:c},shell:{useragent:{isMobile:d}}}=s();return o({apiName:"ALLIANCES_API",query:{query:y,variables:JSON.stringify({placeholderId:u[e]||58,poly:(0,p.A)({pageTypeMajor:"SRP",entities:c,id:l,cityId:n}),limit:t,service:r||"rent",source:d?"mobile":"web"})}}).catch((e=>e)).then((r=>{if(!r||!r.data||!r.data.data)return;try{var s=r.data.data.error,i=r.data.data.allianceDetails}catch(e){i=[]}let o;return s&&s.msg&&Promise.reject(s),t?i instanceof Array?o=i.slice(0,t):i&&i.hooks instanceof Array?(o=i,o.hooks=o.hooks.slice(0,t)):o=i:o=i,a({type:"SET_ALLIANCES_DATA",payload:{[e]:o}}),i}))})("serp",r,I)),{hooks:t}=e||{};P=t;break;case"fixedAdSlot":P=await s(function(){let{entities:e,hash:t}=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};return(r,s,i)=>{let{fetch:l}=i,{filters:{service:c,category:d,[(0,a.A)(c,d)]:p={},selectedCity:u},seo:{pageTypeMajor:y}={}}=s();const{filters:{type:h}={}}=(0,o.A)(t)||{};if(!(e&&e.length||t))return Promise.resolve();if(e){const{backEndFilters:t}=(0,n.A)({entities:e});p=t}else{const{entities:r,backEndFilters:a}=(0,n.A)({hash:t});e=r,p=a}if(e.length&&["polygon","project","resale","rent"].indexOf(e[0].type)<0)return Promise.resolve();delete p.poly;const m=(0,a.A)(c,d);let f;return f="details"===y&&"rent"!==m?2:1,l({apiName:"FIXED_AD_SLOT_API",cacheType:"stale",query:{query:g,variables:JSON.stringify({entities:e,filters:p,meta:{city:u,pageTypeMajor:y},count:f,service:c,saleType:h,category:d})}}).then((function(){let{data:{data:{fixedAdSlot:e=[]}={}}}=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};const t=e&&e.length>0?e:void 0;return r({type:"UPDATE_META_DATA",payload:{fixedAdData:t}}),t})).catch((()=>[]))}}({hash:L}));break;case"upperShowCase":const{upperShowCase:i}=getFeaturedProperties(U,N);P=i;break;case"lowerShowCase":const{lowerShowCase:l}=getFeaturedProperties(U,N);P=l;break;case"recommendedSellers":P=await s((0,h.default)()),P.ultraBrokersData?.length||P.expertBrokersData?.length||P.expertProBrokersData?.length?P.pagination=!0:P=null}return t&&e&&!P?(P=await s(function fetchExtraCards(e,t){let{cardName:r,name:a}=arguments.length>2&&void 0!==arguments[2]?arguments[2]:{};return(s,n,c)=>{let{fetch:d}=c;if(!["buy","rent"].includes(t))return Promise.resolve();let{searchResults:p,cookies:{organicOrDirectTraffic:u}={},routeParams:{params:{hash:y}={}}={},meta:{searchExtraCards:g={},fallbackExtraCards:h={}}={}}=n();if(!["buy","rent"].includes(t))return Promise.resolve();h?.name&&delete h?.name,s({type:"UPDATE_META_DATA",payload:{fallbackExtraCards:{...h||{}}}});const m=`${t}-${y}`,{searchEntityDetails:f={}}=p||{};if(g&&g.uniqueKey===m&&!r)return Promise.resolve();const{filters:{type:v}={}}=(0,o.A)(y)||{},S={...e.meta,searchEntityDetails:f,organicOrDirectTraffic:u};r&&(S.key=r);const b={page:parseInt(e?.pageInfo?.page||1),size:20};return d({apiName:i._L,query:{query:l,variables:JSON.stringify({...e,meta:S,pageInfo:b})}}).then((e=>{let{data:{data:{extraCards:t}={}}={}}=e;if(r)return s({type:"UPDATE_META_DATA",payload:{fallbackExtraCards:{...h||{},[a]:t?.[0]?.data}}}),t?.[0]?.data;s({type:"UPDATE_META_DATA",payload:{searchExtraCards:{cards:t,uniqueKey:m},fallbackExtraCards:{}}})})).catch((e=>[]))}}(M,q,{cardName:e,name:t})),P):P}}},20261:(e,t,r)=>{r.d(t,{A:()=>fetchNearByPolyTrends});const a=r(99413).J`
+  query(
+    $poly: String!
+    $service: String
+    $count: Int
+    $inventoryCountRequired: Boolean
+    $page: String
+  ) {
+    nearByLocalityTrends(
+      poly: $poly
+      service: $service
+      count: $count
+      inventoryCountRequired: $inventoryCountRequired
+      page: $page
+    ) {
+      name
+      id
+      parentId
+      distance
+      growthRate
+      priceTrendsUrl
+      url
+      overviewPageUrl
+      price {
+        displayValue
+        unit
+        value
+      }
+      rent
+      resaleCount
+      links {
+        url
+        label
+      }
+    }
+  }
+`,fetchNearByPolyTrends=e=>{let{entities:t,poly:r,inventoryCountRequired:s=!1,page:i=""}=e;return(e,o,l)=>{let{fetch:n}=l,{filters:{entities:c,service:d}={},searchResults:{searchEntityDetails:p}={}}=o();const{name:u,type:y,polygon:g}=p||{},{id:h}=g||{};c=t||c||[],c="landmark"===y?[{name:u,id:h}]:c;const m=(c||[]).filter((e=>{let{type:t}=e;return"polygon"!==t}));return m&&(r||c[0]?.id)?n({apiName:"NEAR_BY_POLY_PRICE_TRENDS",query:{query:a,variables:JSON.stringify({poly:r||c[0]?.id,service:d,count:5,inventoryCountRequired:s,page:i})}}).then((function(){let{data:{data:{nearByLocalityTrends:e=[]}={}}={}}=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};return e})).catch((()=>[])):(e({type:"UPDATE_META_DATA",payload:{nearbyLocalities:[]}}),Promise.resolve())}}},21108:(e,t,r)=>{r.d(t,{FM:()=>fetchVideoShortsData,q0:()=>fetchDedicatedVideoShorts});var a=r(99413),s=r(59085),i=r(15903),o=r(66144),l=r(28525);a.J`
+  fragment PR on Property {
+    streetInfo
+    title
+    subtitle
+    url
+    storiesVideoTemplate1Url
+    storiesVideoTemplate2Url
+    storiesVideoThumbnailUrl
+    displayPrice {
+      value
+      displayValue
+      unit
+      deposit
+    }
+    coverImage {
+      src
+      alt
+      videoUrl
+    }
+    isActiveProperty
+    galleryTitle
+    tracking
+    imageCount
+    propertyType
+    address {
+      address
+      url
+      detailedPropertyAddress {
+        url
+        val
+      }
+      distanceFromEntity
+    }
+    polygonsHash
+    label
+    badge
+    listingId
+    postedDate
+    originalListingId
+    promotions
+    coords
+    tags
+    furnishingType
+    builtUpArea {
+      value
+      unit
+    }
+    sellerCount
+    meta
+    details {
+      sliceViewUrl
+      images {
+        images {
+          src
+          alt
+          aspectRatio
+        }
+      }
+      config {
+        propertyConfig {
+          key
+          label
+        }
+      }
+    }
+  }
+  fragment BS on User {
+    name
+    id
+    image
+    firmName
+    url
+    phone {
+      partialValue
+    }
+    isPrime
+    isPaid
+    designation
+  }
+  query($city: CityInput, $hash: String, $filters: JSON) {
+    videoStories(city: $city, hash: $hash, filters: $filters) {
+      ...PR
+      sellers {
+        ...BS
+      }
+    }
+  }
+`;const n=a.J`
+  fragment PR on Property {
+    title
+    subtitle
+    url
+    streetInfo
+    storiesVideoTemplate1Url
+    storiesVideoTemplate2Url
+    storiesVideoThumbnailUrl
+    videoStoriesHasAudio
+    displayPrice {
+      value
+      displayValue
+      unit
+      deposit
+    }
+    coverImage {
+      src
+      alt
+      videoUrl
+    }
+    isActiveProperty
+    galleryTitle
+    tracking
+    imageCount
+    propertyType
+    address {
+      address
+      url
+      detailedPropertyAddress {
+        url
+        val
+      }
+      distanceFromEntity
+    }
+    polygonsHash
+    label
+    badge
+    listingId
+    postedDate
+    originalListingId
+    promotions
+    coords
+    tags
+    furnishingType
+    builtUpArea {
+      value
+      unit
+    }
+    sellerCount
+    meta
+    details {
+      sliceViewUrl
+      images {
+        images {
+          src
+          alt
+          aspectRatio
+        }
+      }
+      config {
+        propertyConfig {
+          key
+          label
+        }
+      }
+      averagePrice
+      flatInfo {
+        furnishingType
+        occupants
+        floor
+        houseHelp
+        parkingCount
+        houseRules
+        amenities {
+          type
+          label
+          data
+        }
+      }
+      possessionDate
+      amenities {
+        type
+        label
+        data
+      }
+      furnishings {
+        type
+        label
+        data
+      }
+      propertyConfigs {
+        id
+        icon
+        label
+        description
+        meta
+        showOnMobile
+        mobileLabel
+        formattedDescription
+      }
+      formattedInventoryAmenities {
+        key
+        label
+      }
+    }
+    insights {
+      id
+      value
+    }
+    features {
+      label
+      meta
+      id
+      description
+      position
+    }
+    featureAndConfig {
+      id
+      description
+      label
+    }
+    propertyTags
+    inventoryAmenities
+  }
+  fragment BS on User {
+    name
+    id
+    image
+    firmName
+    url
+    phone {
+      partialValue
+    }
+    isPrime
+    isPaid
+    designation
+  }
+  mutation($shortsInput: VideoShortsInput!) {
+    videoShortsFilter(shortsInput: $shortsInput) {
+      videoShorts {
+        ...PR
+        sellers {
+          ...BS
+        }
+      }
+      isLastPage
+      total
+    }
+  }
+`,fetchVideoShortsData=e=>{let{listingId:t,service:r,seenPropertyIds:a=[],videoProductType:c,poly:d,page:p=1,type:u="all",fromSrp:y,shortsHash:g,sellerUuids:h}=e;return(e,c,m)=>{let{fetch:f}=m;const{filters:{service:v,category:S,subCategory:b,selectedCity:{id:P,cityId:A},selectedCity:T}={},routeParams:{params:{hash:I,eventId:$}={}}={},searchResults:C,event:{id:k}={},seo:{pageTypeMajor:E}}=c(),{searchEntityDetails:_={}}=C||{},x=(0,s.A)(v,S,b),D="home"===E?.toLowerCase();let w=g||I;D&&A&&!g&&(w=(((0,l.Gq)("prevSrpHash")||{})[A]||{})[x]||I);const L={seenPropertyIds:a,boostedPropertyId:t,poly:d||P,service:r||x,page:p,resultsPerPage:10,meta:{searchEntityDetails:_},city:T,filterService:v,filterCategory:S,hash:w,shortsEventid:k,eventId:$,sellerUuids:h||[]},[{entityAndFilters:{poly:[N]=[]}={}}]=I?(0,i.A)((()=>(0,o.A)(I)),{}):[{}];return y&&(L.poly=N||d,L.hash=I,L.filterService=v,L.filterCategory=S),"shorts"===u?L.videoProductType="image_video_shorts,dc_video_shorts":"stories"===u?(L.videoProductType="story_live_anchor,stories",L.resultsPerPage=50):L.videoProductType="story_live_anchor,stories,image_video_shorts,dc_video_shorts",f({controller:"GET_VIDEO_SHORTS_VIDEO",apiName:"GET_VIDEO_SHORTS_VIDEO",method:"post",body:{query:n,variables:{shortsInput:L}}}).then((e=>{let{data:{data:{videoShortsFilter:{videoShorts:t=[],isLastPage:r,total:a}={}}}={}}=e;return{videoShorts:t,isLastPage:r,total:a}})).catch((e=>[]))}},fetchDedicatedVideoShorts=e=>{let{listingId:t,service:r,seenPropertyIds:a=[],videoProductType:s,poly:i,page:o=1,type:l="all",fromSrp:n,from:c,currentData:d=!1,shortsHash:p,sellerUuids:u,reduxKey:y="videoShorts"}=e;return async(e,c,g)=>{let{fetch:h}=g;const{meta:{[y]:{data:m=[]}={},videoShortsStories:{data:f=[]}={}}={}}=c(),{videoShorts:v=[],isLastPage:S,total:b}=await e(fetchVideoShortsData({listingId:t,service:r,seenPropertyIds:a,poly:i,page:o,type:l,fromSrp:n,videoProductType:s,shortsHash:p,sellerUuids:u}));if("shorts"===l){const a=[...m,...v||[]],o={sellerUuids:u,poly:i,service:r,type:l,listingId:t,videoProductType:s,fromSrp:n,shortsHash:p,reduxKey:y};return e({type:"UPDATE_META_DATA",payload:{[y]:{data:a,isLastPage:S,total:b,fetchContext:o}}}),a}if("stories"===l)return e({type:"UPDATE_META_DATA",payload:{videoStories:v}}),v;{const t=[...f,...v||[]];return e({type:"UPDATE_META_DATA",payload:{videoShortsStories:d?{data:v,isLastPage:S}:{data:[...t],isLastPage:S}}}),d?v:t}}}},27982:(e,t,r)=>{r.d(t,{A:()=>__WEBPACK_DEFAULT_EXPORT__});const __WEBPACK_DEFAULT_EXPORT__=e=>{let t,{pageTypeMajor:r,entities:a,id:s,cityId:i}=e;switch(r){case"SRP":t=((e,t,r)=>e?.reduce((function(e){let{id:a,type:s}=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{};return"polygon"===s&&(a===r?e.push(t):e.push(a)),e}),[])?.join())(a,s,i);break;case"home":default:t=s;break;case"details":t=((e,t)=>`${e?.[0]?.id},${t}`)(a,s)}return t?t.includes(s)?t:`${t},${s}`:s}},98502:(e,t,r)=>{r.d(t,{default:()=>d});var a=r(63502),s=r(75641),i=r(77669),o=r(94508),l=r(55039),n=r(46560),c=r(1050);function _extends(){return _extends=Object.assign?Object.assign.bind():function(e){for(var t=1;t<arguments.length;t++){var r=arguments[t];for(var a in r)({}).hasOwnProperty.call(r,a)&&(e[a]=r[a])}return e},_extends.apply(null,arguments)}const d=(0,s.forwardRef)(((e,t)=>{let{children:r,title:d,subtitle:p,card:u,style:y,data:g=[],itemKey:h,options:{identifierId:m,slidesToShow:f=2,centerMode:v=!1,isMobile:S=!1,freeScroll:b=!1,leftArrowStyle:P="",rightArrowStyle:A="",src:T="",imageStyle:I,showNewHeading:$=!1}={},carouselStyle:C,carouselTitleStyle:k,carouselContentStyle:E,previousTemplate:_,nextTemplate:x,slideContainerStyle:D,onClick:w=()=>{},placement:L,onCarouselScrollClick:N=()=>{},onChangeSelection:U,selectedValues:q,showGroupCta:R,sellerContacts:M,SeeMoreSection:O,name:j,cardName:V,...B}=e;const J=$?"div":"h3",[F,H]=(0,s.useState)(g),G=(0,i.useDispatch)();return(0,s.useEffect)((()=>{!g?.length&&j&&V&&G((0,c.u)({name:j,cardName:V})).then((e=>{e?.length&&H(e)}))}),[]),(0,a.jsx)("section",{css:(0,a.css)([l.HZ,C],""),className:"carousel-style","data-q":h},(0,a.jsx)("header",null,T&&(0,a.jsx)(n.A,{src:T,alt:"icons",style:I}),d&&(0,a.jsx)(J,{css:(0,a.css)([l.qf,k],""),className:"title"},d),p&&(0,a.jsx)("h3",{css:l.yb,className:"subtitle"},p)),(0,a.jsx)("div",{css:(0,a.css)([l.TS,E],""),className:"section-content"},(0,a.jsx)(o.Ay,{identifierId:m,slidesToShow:f,slidesToScroll:1,startSlide:0,centerMode:v,isMobile:S,freeScroll:b,previousTemplate:P&&(0,o.fn)(P)||(0,a.jsx)("div",{css:l.Fo,className:"prev-btn"}),nextTemplate:A&&(0,o.Ru)(A)||(0,a.jsx)("div",{css:l.Db,className:"nxt-btn"}),ref:t,style:D,placement:L,onCarouselScrollClick:N,SeeMoreSection:O},F.map(((e,t)=>(0,a.jsx)(u,_extends({style:y,key:t,data:e},B,{index:t,onClick:e=>{w(e,t)},placement:L,onChangeSelection:U,selectedValues:q,sellerContacts:M,showGroupCta:R})))))),r)}))},99466:(e,t,r)=>{r.d(t,{default:()=>__WEBPACK_DEFAULT_EXPORT__});var a=r(99413),s=r(59085);const i=a.J`
+  fragment BS on User {
+    id
+    name
+    firmName
+    firmImage
+    image
+    url
+    agentDescription: description @include(if: $agent)
+    description @skip(if: $agent)
+    localities {
+      name
+    }
+    stats {
+      label
+      description
+    }
+    type
+    designation
+    sellerBadge
+    isCertifiedAgent
+    sellerPropertiesInfo {
+      minPrice
+      maxPrice
+      bhkInfo
+      experience
+      totalProperties
+    }
+    sellerOverlayColor
+    sellerOverlayTextColor
+  }
+  query(
+    $city: CityInput
+    $hash: String
+    $service: String!
+    $category: String!
+    $agent: Boolean!
+    $meta: JSON
+    $fallback: FallbackInput
+  ) {
+    recommendedSellers(
+      city: $city
+      hash: $hash
+      service: $service
+      category: $category
+      meta: $meta
+      fallback: $fallback
+    ) {
+      ultra {
+        cursor
+        isLastPage
+        brokers {
+          ...BS
+        }
+      }
+      experts {
+        cursor
+        isLastPage
+        brokers {
+          ...BS
+        }
+      }
+      expertPro {
+        cursor
+        isLastPage
+        brokers {
+          ...BS
+        }
+      }
+    }
+  }
+`,__WEBPACK_DEFAULT_EXPORT__=(e,t)=>(r,a,o)=>{let{fetch:l}=o;const{filters:{selectedCity:n,service:c,category:d,subCategory:p}={},seo:{pageTypeMajor:u}={},routeParams:{params:{hash:y}={}}={},meta:{recommendedSellers:{ultra:{page:g=1,cursor:h,isLastPage:m,brokers:f=[]}={},experts:{page:v=1,cursor:S,isLastPage:b,brokers:P=[]}={},expertPro:{page:A=1,cursor:T,isLastPage:I,brokers:$=[]}={}}={}}={}}=a(),C=(0,s.A)(c,d,p),k=!!e;if(m&&b&&I&&t)return Promise.resolve();const[E,_,x]=t?[1,1,1]:[0,0,0],[D,w,L]=[m?1:parseInt(g)+E,b?1:parseInt(v)+_,I?1:parseInt(A)+x],N=!m||!t,U=!b||!t,q=!I||!t;return l({apiName:"FETCH_RECOMMENDED_SELLERS",controller:"FETCH_RECOMMENDED_SELLERS",query:{query:i,variables:JSON.stringify({city:n,hash:y,service:c,category:d,agent:k,meta:{ultraPage:D,expertPage:w,expertProPage:L,ultraCursor:h,expertCursor:S,expertProCursor:T,loadUltra:N,loadExpert:U,loadExpertPro:q},..."home"===u&&["buy","rent"].includes(C)&&{fallback:{entityId:n.cityId,componentName:"recommended_sellers",pageType:"home"}}})}}).then((e=>{const{data:{data:{recommendedSellers:{ultra:a,experts:s,expertPro:i,ultra:{brokers:o=[]}={},experts:{brokers:l=[]}={},expertPro:{brokers:n=[]}={}}={}}={}}}=e||{},c=t?[...f,...o]:o,d=t?[...P,...l]:l,p=t?[...$,...n]:n;return r({type:"UPDATE_META_DATA",payload:{recommendedSellers:{ultra:{...a,page:g,brokers:c},experts:{...s,page:w,brokers:d},expertPro:{...i,page:L,brokers:p}}}}),{ultraBrokersData:c,expertBrokersData:d,expertProBrokersData:p}})).catch((()=>{}))}}}]);
