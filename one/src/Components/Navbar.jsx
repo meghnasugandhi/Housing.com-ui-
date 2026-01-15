@@ -1,19 +1,61 @@
 import React, { useState } from 'react';
-import { Navbar, Nav, NavDropdown, Container, Button, Row, Col, Offcanvas, Badge } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown, Container, Button, Row, Col, Offcanvas, Badge, Modal, Form, InputGroup } from 'react-bootstrap';
 import { 
   FaUserCircle, FaBars, FaCity, FaHome, FaBuilding, 
   FaLayerGroup, FaWarehouse, FaMobileAlt, FaGem, 
   FaExchangeAlt, FaStar, FaBellSlash, FaExclamationTriangle, 
-  FaQuestionCircle, FaQrcode 
+  FaQuestionCircle, FaQrcode, FaCalculator 
 } from 'react-icons/fa';
 import { Link, useParams } from 'react-router-dom'; 
 import { properties } from "../data/properties"; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+// --- LOGIN UI COMPONENT (INTERNAL) ---
+const HousingLoginUI = ({ show, handleClose }) => {
+  return (
+    <Modal 
+      show={show} 
+      onHide={handleClose} 
+      centered 
+      contentClassName="rounded-0 border-0"
+      style={{ zIndex: 1100 }}
+    >
+      <Modal.Header closeButton className="border-0 pb-0"></Modal.Header>
+      <Modal.Body className="px-5 pb-5 pt-0 text-center">
+        <div className="mb-4 d-flex justify-content-center">
+          <div style={{ backgroundColor: '#5e23dc', padding: '10px 20px', color: 'white', fontWeight: 'bold', fontSize: '1.2rem' }}>
+            HOUSING<span style={{ fontSize: '0.8rem' }}>.COM</span>
+          </div>
+        </div>
+        <h5 className="text-muted fw-normal mb-4" style={{ fontSize: '1.1rem' }}>
+          Your Trusted Real Estate Partner
+        </h5>
+        <Form>
+          <div className="text-start mb-1" style={{ fontSize: '0.75rem', color: '#5e23dc', fontWeight: '600' }}>
+            Enter Phone Number
+          </div>
+          <InputGroup className="mb-4 border-bottom border-primary border-2">
+            <Form.Select variant="flush" style={{ maxWidth: '80px', border: 'none', boxShadow: 'none' }}>
+              <option>+91</option>
+              <option>+1</option>
+              <option>+44</option>
+            </Form.Select>
+            <Form.Control type="tel" className="border-0 shadow-none" />
+          </InputGroup>
+          <Button variant="light" disabled className="w-100 py-2 fw-bold text-muted" style={{ backgroundColor: '#d3d3d3', border: 'none' }}>
+            Continue
+          </Button>
+        </Form>
+      </Modal.Body>
+    </Modal>
+  );
+};
+
 const HousingNavbar = () => {
   const { city = "mumbai" } = useParams();
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [showSidebar, setShowSidebar] = useState(false);
+  const [showLogin, setShowLogin] = useState(false); // New Login State
 
   const handleMouseEnter = (menuId) => setActiveDropdown(menuId);
   const handleMouseLeave = () => setActiveDropdown(null);
@@ -42,7 +84,7 @@ const HousingNavbar = () => {
         /* --- FIXED NAVBAR LAYERING --- */
         .housing-navbar {
           position: absolute; top: 0; left: 0; width: 100%; 
-          z-index: 1030 !important; /* Lowered so sidebar stays on top */
+          z-index: 1030 !important; 
           background: transparent !important; 
           border-bottom: 1px solid rgba(255, 255, 255, 0.1);
           padding: 12px 0; font-family: 'Open Sans', sans-serif;
@@ -50,8 +92,8 @@ const HousingNavbar = () => {
 
         /* --- FIXED SIDEBAR APPEARANCE --- */
         .custom-sidebar {
-          background-color: #ffffff !important; /* Solid background to hide navbar behind it */
-          z-index: 1060 !important; /* Higher than navbar */
+          background-color: #ffffff !important; 
+          z-index: 1060 !important; 
           box-shadow: -5px 0 25px rgba(0,0,0,0.15);
         }
 
@@ -237,15 +279,15 @@ const HousingNavbar = () => {
               <NavDropdown title="For Sellers" className="dropdown-sellers" show={activeDropdown === 'sellers'} onMouseEnter={() => handleMouseEnter('sellers')} onMouseLeave={handleMouseLeave}>
                 <div className="mega-menu">
                   <div className="menu-column-title">Packages for</div>
-                  <Link to="/developers" className="info-link">
+                  <Link to="/sellers?type=developer" className="info-link" onClick={() => setActiveDropdown(null)}>
                     <span className="info-item-title">Developers</span>
                     <span className="info-item-sub">Launch or sell homes</span>
                   </Link>
-                  <Link to="/brokers" className="info-link">
+                  <Link to="/sellers?type=broker" className="info-link" onClick={() => setActiveDropdown(null)}>
                     <span className="info-item-title">Brokers</span>
                     <span className="info-item-sub">List and grow business</span>
                   </Link>
-                  <Link to="/post-property" className="info-link">
+                  <Link to="/owners" className="info-link" onClick={() => setActiveDropdown(null)}>
                     <span className="info-item-title">Owners</span>
                     <span className="info-item-sub">Sell or rent easily</span>
                   </Link>
@@ -257,13 +299,18 @@ const HousingNavbar = () => {
                   <Row>
                     <Col md={6}>
                       <div className="menu-column-title">Housing Edge</div>
-                      <Link to="/home-loans" className="service-link">Home Loan</Link>
-                      <Link to="/protect" className="service-link">Housing Protect</Link>
-                      <Link to="/premium" className="service-link">Housing Premium</Link>
+                      <Link to="/home-loans" className="service-link" onClick={() => setActiveDropdown(null)}>Home Loan</Link>
+                      <Link to="/protect" className="service-link" onClick={() => setActiveDropdown(null)}>Housing Protect</Link>
+                      <Link to="/premium" className="service-link fw-bold" onClick={() => setActiveDropdown(null)}>
+                        <FaGem className="me-2 text-danger" /> Housing Premium
+                        <Badge bg="danger" className="ms-2" style={{fontSize: '0.65rem'}}>OFFER</Badge>
+                      </Link>
                     </Col>
                     <Col md={6}>
                       <div className="menu-column-title">Tools</div>
-                      <Link to="/emi-calculator" className="service-link">EMI calculator</Link>
+                      <Link to="/emi-calculator" className="service-link" onClick={() => setActiveDropdown(null)}>
+                        <FaCalculator className="me-2 text-muted" /> EMI calculator
+                      </Link>
                       <Link to="/property-value" className="service-link">Property value calculator</Link>
                       <Link to="/rent-receipt" className="service-link">Rent receipt generator</Link>
                     </Col>
@@ -298,7 +345,7 @@ const HousingNavbar = () => {
               </Nav.Link>
 
               <div className="post-prop-wrapper">
-                <Button as={Link} to="/post-property" variant="link" className="post-prop-btn">Post Property</Button>
+                <Button as={Link} to="/owners" variant="link" className="post-prop-btn">Post Property</Button>
                 <span className="free-badge">Free</span>
               </div>
 
@@ -328,7 +375,16 @@ const HousingNavbar = () => {
                   <div style={{ fontSize: '0.7rem', color: '#888' }}>Login for better experience</div>
                 </div>
               </div>
-              <Button className="login-btn-sidebar">Login</Button>
+              {/* --- LINKED LOGIN BUTTON --- */}
+              <Button 
+                className="login-btn-sidebar" 
+                onClick={() => {
+                  setShowLogin(true); // Open the Modal
+                  handleCloseSidebar(); // Close the Sidebar
+                }}
+              >
+                Login
+              </Button>
             </div>
           </Offcanvas.Title>
         </Offcanvas.Header>
@@ -342,8 +398,8 @@ const HousingNavbar = () => {
               <div className="activity-box"><strong>00</strong> Searches</div>
             </div>
             <div style={{ textAlign: 'center', padding: '20px 0' }}>
-               <img src="https://cdn-icons-png.flaticon.com/512/202/202387.png" alt="search" width="80" style={{opacity: 0.5}} />
-               <Button className="start-search-btn">Start new search</Button>
+                <img src="https://cdn-icons-png.flaticon.com/512/202/202387.png" alt="search" width="80" style={{opacity: 0.5}} />
+                <Button className="start-search-btn">Start new search</Button>
             </div>
           </div>
 
@@ -351,12 +407,14 @@ const HousingNavbar = () => {
             <img src="https://cdn-icons-png.flaticon.com/512/602/602182.png" alt="house" width="40" />
             <div>
               <p>Looking to sell / rent your property?</p>
-              <button className="post-free-inline">Post property for FREE</button>
+              <Link to="/owners" onClick={handleCloseSidebar} style={{textDecoration: 'none'}}>
+                <button className="post-free-inline">Post property for FREE</button>
+              </Link>
             </div>
           </div>
 
           <div className="sidebar-links-list">
-            <Link to="/" className="sidebar-link"><FaGem /> Zero Brokerage Properties</Link>
+            <Link to="/premium" className="sidebar-link"><FaGem className="text-danger" /> Housing Premium</Link>
             <Link to="/" className="sidebar-link"><FaExchangeAlt /> My Transactions</Link>
             <Link to="/" className="sidebar-link">
               <FaStar /> My Reviews <Badge className="sidebar-badge">NEW</Badge>
@@ -371,17 +429,20 @@ const HousingNavbar = () => {
           </Link>
 
           <div className="download-footer">
-             <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-               <span style={{fontSize: '0.85rem', fontWeight: 600}}>Download Housing App</span>
-               <FaQrcode style={{fontSize: '1.2rem'}} />
-             </div>
-             <div className="app-store-icons">
-               <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="App Store" />
-               <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Play Store" />
-             </div>
+              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                <span style={{fontSize: '0.85rem', fontWeight: 600}}>Download Housing App</span>
+                <FaQrcode style={{fontSize: '1.2rem'}} />
+              </div>
+              <div className="app-store-icons">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="App Store" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Play Store" />
+              </div>
           </div>
         </Offcanvas.Body>
       </Offcanvas>
+
+      {/* --- RENDER THE LOGIN MODAL --- */}
+      <HousingLoginUI show={showLogin} handleClose={() => setShowLogin(false)} />
     </>
   );
 };
