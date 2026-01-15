@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Navbar, Nav, NavDropdown, Container, Button, Row, Col, Offcanvas, Badge, Modal, Form, InputGroup } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown, Container, Button, Row, Col, Offcanvas, Badge } from 'react-bootstrap';
 import { 
   FaUserCircle, FaBars, FaCity, FaHome, FaBuilding, 
   FaLayerGroup, FaWarehouse, FaMobileAlt, FaGem, 
@@ -9,53 +9,13 @@ import {
 import { Link, useParams } from 'react-router-dom'; 
 import { properties } from "../data/properties"; 
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-// --- LOGIN UI COMPONENT (INTERNAL) ---
-const HousingLoginUI = ({ show, handleClose }) => {
-  return (
-    <Modal 
-      show={show} 
-      onHide={handleClose} 
-      centered 
-      contentClassName="rounded-0 border-0"
-      style={{ zIndex: 1100 }}
-    >
-      <Modal.Header closeButton className="border-0 pb-0"></Modal.Header>
-      <Modal.Body className="px-5 pb-5 pt-0 text-center">
-        <div className="mb-4 d-flex justify-content-center">
-          <div style={{ backgroundColor: '#5e23dc', padding: '10px 20px', color: 'white', fontWeight: 'bold', fontSize: '1.2rem' }}>
-            HOUSING<span style={{ fontSize: '0.8rem' }}>.COM</span>
-          </div>
-        </div>
-        <h5 className="text-muted fw-normal mb-4" style={{ fontSize: '1.1rem' }}>
-          Your Trusted Real Estate Partner
-        </h5>
-        <Form>
-          <div className="text-start mb-1" style={{ fontSize: '0.75rem', color: '#5e23dc', fontWeight: '600' }}>
-            Enter Phone Number
-          </div>
-          <InputGroup className="mb-4 border-bottom border-primary border-2">
-            <Form.Select variant="flush" style={{ maxWidth: '80px', border: 'none', boxShadow: 'none' }}>
-              <option>+91</option>
-              <option>+1</option>
-              <option>+44</option>
-            </Form.Select>
-            <Form.Control type="tel" className="border-0 shadow-none" />
-          </InputGroup>
-          <Button variant="light" disabled className="w-100 py-2 fw-bold text-muted" style={{ backgroundColor: '#d3d3d3', border: 'none' }}>
-            Continue
-          </Button>
-        </Form>
-      </Modal.Body>
-    </Modal>
-  );
-};
+import HousingLoginUI from './HousingLoginUI'; // Import the separate component
 
 const HousingNavbar = () => {
   const { city = "mumbai" } = useParams();
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [showSidebar, setShowSidebar] = useState(false);
-  const [showLogin, setShowLogin] = useState(false); // New Login State
+  const [showLogin, setShowLogin] = useState(false);
 
   const handleMouseEnter = (menuId) => setActiveDropdown(menuId);
   const handleMouseLeave = () => setActiveDropdown(null);
@@ -379,8 +339,8 @@ const HousingNavbar = () => {
               <Button 
                 className="login-btn-sidebar" 
                 onClick={() => {
-                  setShowLogin(true); // Open the Modal
-                  handleCloseSidebar(); // Close the Sidebar
+                  setShowLogin(true);
+                  handleCloseSidebar();
                 }}
               >
                 Login
@@ -441,7 +401,7 @@ const HousingNavbar = () => {
         </Offcanvas.Body>
       </Offcanvas>
 
-      {/* --- RENDER THE LOGIN MODAL --- */}
+      {/* --- RENDER THE LOGIN MODAL (now imported) --- */}
       <HousingLoginUI show={showLogin} handleClose={() => setShowLogin(false)} />
     </>
   );
