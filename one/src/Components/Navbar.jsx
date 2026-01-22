@@ -4,12 +4,14 @@ import {
   FaUserCircle, FaBars, FaCity, FaHome, FaBuilding, 
   FaLayerGroup, FaWarehouse, FaMobileAlt, FaGem, 
   FaExchangeAlt, FaStar, FaBellSlash, FaExclamationTriangle, 
-  FaQuestionCircle, FaQrcode, FaCalculator 
+  FaQuestionCircle, FaQrcode, FaCalculator,
+  FaUserPlus // Added Register Icon
 } from 'react-icons/fa';
 import { Link, useParams } from 'react-router-dom'; 
 import { properties } from "../data/properties"; 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import HousingLoginUI from './HousingLoginUI'; // Import the separate component
+import HousingLoginUI from './HousingLoginUI'; 
+import RegisterPage from './RegisterPage';
 
 const HousingNavbar = () => {
   const { city = "mumbai" } = useParams();
@@ -71,6 +73,11 @@ const HousingNavbar = () => {
         .housing-navbar .dropdown-toggle {
           color: white !important; font-weight: 500; font-size: 0.92rem;
           padding-left: 10px !important; padding-right: 10px !important;
+        }
+
+        /* --- REGISTER LINK SPECIFIC STYLE --- */
+        .housing-navbar .register-link {
+          display: flex; align-items: center; gap: 6px;
         }
 
         .mega-menu {
@@ -175,6 +182,7 @@ const HousingNavbar = () => {
           <Navbar.Collapse id="housing-nav">
             <Nav className="ms-auto align-items-center">
               
+              {/* FOR BUYERS */}
               <NavDropdown title="For Buyers" className="dropdown-buyers" show={activeDropdown === 'buyers'} onMouseEnter={() => handleMouseEnter('buyers')} onMouseLeave={handleMouseLeave}>
                 <div className="mega-menu">
                   <Row>
@@ -206,6 +214,7 @@ const HousingNavbar = () => {
                 </div>
               </NavDropdown>
 
+              {/* FOR TENANTS */}
               <NavDropdown title="For Tenants" className="dropdown-tenants" show={activeDropdown === 'tenants'} onMouseEnter={() => handleMouseEnter('tenants')} onMouseLeave={handleMouseLeave}>
                 <div className="mega-menu">
                   <Row>
@@ -236,6 +245,7 @@ const HousingNavbar = () => {
                 </div>
               </NavDropdown>
 
+              {/* FOR SELLERS */}
               <NavDropdown title="For Sellers" className="dropdown-sellers" show={activeDropdown === 'sellers'} onMouseEnter={() => handleMouseEnter('sellers')} onMouseLeave={handleMouseLeave}>
                 <div className="mega-menu">
                   <div className="menu-column-title">Packages for</div>
@@ -254,6 +264,7 @@ const HousingNavbar = () => {
                 </div>
               </NavDropdown>
 
+              {/* SERVICES */}
               <NavDropdown title="Services" className="dropdown-services" show={activeDropdown === 'services'} onMouseEnter={() => handleMouseEnter('services')} onMouseLeave={handleMouseLeave}>
                 <div className="mega-menu">
                   <Row>
@@ -278,6 +289,7 @@ const HousingNavbar = () => {
                 </div>
               </NavDropdown>
 
+              {/* NEWS */}
               <NavDropdown title="News & Guide" className="dropdown-news" show={activeDropdown === 'news'} onMouseEnter={() => handleMouseEnter('news')} onMouseLeave={handleMouseLeave}>
                 <div className="mega-menu">
                   <div className="menu-column-title">Property market guide</div>
@@ -300,15 +312,23 @@ const HousingNavbar = () => {
                 </div>
               </NavDropdown>
 
-              <Nav.Link as={Link} to="/download-app" className="download-app-link">
+              {/* DOWNLOAD APP */}
+              <Nav.Link as={Link} to="/download-app" className="download-app-link ms-2">
                 <FaMobileAlt /> Download App
               </Nav.Link>
 
+              {/* --- REGISTER LINK (ROUTED) --- */}
+              <Nav.Link as={Link} to="/register" className="register-link ms-3">
+                <FaUserPlus /> Register
+              </Nav.Link>
+
+              {/* POST PROPERTY */}
               <div className="post-prop-wrapper">
                 <Button as={Link} to="/owners" variant="link" className="post-prop-btn">Post Property</Button>
                 <span className="free-badge">Free</span>
               </div>
 
+              {/* SIDEBAR TOGGLE */}
               <button className="user-pill" onClick={handleShowSidebar}>
                 <FaBars />
                 <FaUserCircle className="avatar-icon" />
@@ -318,6 +338,7 @@ const HousingNavbar = () => {
         </Container>
       </Navbar>
 
+      {/* SIDEBAR (OFFCANVAS) */}
       <Offcanvas 
         show={showSidebar} 
         onHide={handleCloseSidebar} 
@@ -335,7 +356,6 @@ const HousingNavbar = () => {
                   <div style={{ fontSize: '0.7rem', color: '#888' }}>Login for better experience</div>
                 </div>
               </div>
-              {/* --- LINKED LOGIN BUTTON --- */}
               <Button 
                 className="login-btn-sidebar" 
                 onClick={() => {
@@ -401,7 +421,7 @@ const HousingNavbar = () => {
         </Offcanvas.Body>
       </Offcanvas>
 
-      {/* --- RENDER THE LOGIN MODAL (now imported) --- */}
+      {/* LOGIN MODAL */}
       <HousingLoginUI show={showLogin} handleClose={() => setShowLogin(false)} />
     </>
   );

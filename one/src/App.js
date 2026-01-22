@@ -18,6 +18,8 @@ import News from "./Components/News"; // Import the News component
 import FindingAHouse from "./Components/FindingAHouse";
 import Research from "./Components/Research";
 import Bangalore from "./Components/Bangalore";
+import RegisterPage from "./Components/RegisterPage";
+
 
 const SellersPage = () => {
   const location = useLocation();
@@ -49,6 +51,20 @@ function App() {
               <HomeVersion activeTab={activeTab} />
             </>
           }
+        />
+        {/* --- ADDED REGISTER ROUTE --- */}
+        <Route 
+          path="/register" 
+          element={
+            <div style={{ backgroundColor: '#f4f5f7', minHeight: '100vh' }}>
+              {/* Adding Navbar here so user can still navigate */}
+               
+              <div style={{ paddingTop: '100px', paddingBottom: '50px' }}>
+                <RegisterPage />
+              </div>
+              <HousingFooter />
+            </div>
+          } 
         />
          {/* BUYING GUIDE / FINDING A HOUSE ROUTE */}
 {/* BUYING GUIDE ROUTE */}

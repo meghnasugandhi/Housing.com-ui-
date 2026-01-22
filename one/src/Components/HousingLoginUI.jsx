@@ -2,26 +2,42 @@ import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form, InputGroup } from 'react-bootstrap';
 
 const HousingLoginUI = ({ show, handleClose }) => {
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [loginMethod, setLoginMethod] = useState('phone'); // 'phone' or 'email'
+  const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState('');
   const [isValid, setIsValid] = useState(false);
 
-  // Reset state when modal opens/closes
+  // Reset state when modal opens/closes or when switching methods
   useEffect(() => {
-    if (show) {
-      setPhoneNumber('');
-      setError('');
-      setIsValid(false);
-    }
-  }, [show]);
+    setInputValue('');
+    setError('');
+    setIsValid(false);
+  }, [show, loginMethod]);
+
+  const validateEmail = (email) => {
+    return String(email)
+      .toLowerCase()
+      .match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
+  };
 
   const handleInputChange = (e) => {
-    const value = e.target.value.replace(/\D/g, ''); // Remove non-digits
-    if (value.length <= 10) {
-      setPhoneNumber(value);
-      
-      // Validate when user types
-      if (value.length === 10) {
+    const value = e.target.value;
+
+    if (loginMethod === 'phone') {
+      const numericValue = value.replace(/\D/g, ''); // Remove non-digits
+      if (numericValue.length <= 10) {
+        setInputValue(numericValue);
+        if (numericValue.length === 10) {
+          setIsValid(true);
+          setError('');
+        } else {
+          setIsValid(false);
+        }
+      }
+    } else {
+      // Email Logic
+      setInputValue(value);
+      if (validateEmail(value)) {
         setIsValid(true);
         setError('');
       } else {
@@ -32,28 +48,13 @@ const HousingLoginUI = ({ show, handleClose }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    if (phoneNumber.length !== 10) {
-      setError('Please enter a valid 10-digit mobile number');
+    if (!isValid) {
+      setError(`Please enter a valid ${loginMethod}`);
       return;
     }
     
-    // Phone is valid, proceed with login
-    console.log('Phone number submitted:', phoneNumber);
-    alert(`Success! Moving to OTP for: ${phoneNumber}`);
-    // handleClose(); // You can close the modal here if needed
-  };
-
-  const handleContinue = () => {
-    if (phoneNumber.length !== 10) {
-      setError('Please enter a valid 10-digit mobile number');
-      return;
-    }
-    
-    // Phone is valid, proceed with login
-    console.log('Phone number submitted:', phoneNumber);
-    alert(`Success! Moving to OTP for: ${phoneNumber}`);
-    // handleClose(); // You can close the modal here if needed
+    console.log(`${loginMethod} submitted:`, inputValue);
+    alert(`Success! Proceeding with ${loginMethod}: ${inputValue}`);
   };
 
   return (
@@ -74,35 +75,36 @@ const HousingLoginUI = ({ show, handleClose }) => {
         <h5 className="text-muted fw-normal mb-4" style={{ fontSize: '1.1rem' }}>
           Your Trusted Real Estate Partner
         </h5>
+
         <Form onSubmit={handleSubmit}>
           <div className="text-start mb-1" style={{ fontSize: '0.75rem', color: '#5e23dc', fontWeight: '600' }}>
-            Enter Phone Number
+            {loginMethod === 'phone' ? 'Enter Phone Number' : 'Enter Email Address'}
           </div>
+
           <InputGroup className={`mb-2 border-bottom ${isValid ? 'border-success' : error ? 'border-danger' : 'border-primary'} border-2`}>
-            <Form.Select variant="flush" style={{ maxWidth: '80px', border: 'none', boxShadow: 'none' }}>
-              <option>+91</option>
-              <option>+1</option>
-              <option>+44</option>
-            </Form.Select>
+            {loginMethod === 'phone' && (
+              <Form.Select variant="flush" style={{ maxWidth: '80px', border: 'none', boxShadow: 'none' }}>
+                <option>+91</option>
+                <option>+1</option>
+              </Form.Select>
+            )}
             <Form.Control 
-              type="tel" 
+              type={loginMethod === 'phone' ? "tel" : "email"} 
               className="border-0 shadow-none" 
-              placeholder="Enter 10 digit number"
-              value={phoneNumber}
+              placeholder={loginMethod === 'phone' ? "Enter 10 digit number" : "e.g. name@email.com"}
+              value={inputValue}
               onChange={handleInputChange}
-              maxLength={10}
             />
           </InputGroup>
           
-          {/* Error message */}
           <div className="text-start mb-3" style={{ minHeight: '20px' }}>
             {error && <span className="text-danger" style={{ fontSize: '0.8rem' }}>{error}</span>}
-            {isValid && <span className="text-success" style={{ fontSize: '0.8rem' }}>✓ Valid phone number</span>}
+            {isValid && <span className="text-success" style={{ fontSize: '0.8rem' }}>✓ Valid {loginMethod}</span>}
           </div>
           
           <Button 
             type="submit"
-            className="w-100 py-2 fw-bold"
+            className="w-100 py-2 fw-bold mb-3"
             style={{ 
               backgroundColor: isValid ? '#198754' : '#d3d3d3', 
               border: 'none',
@@ -110,10 +112,19 @@ const HousingLoginUI = ({ show, handleClose }) => {
               cursor: isValid ? 'pointer' : 'not-allowed'
             }}
             disabled={!isValid}
-            onClick={handleContinue}
           >
             Continue
           </Button>
+
+          {/* Toggle Button */}
+          <div className="text-center">
+            <span 
+              onClick={() => setLoginMethod(loginMethod === 'phone' ? 'email' : 'phone')}
+              style={{ color: '#5e23dc', cursor: 'pointer', fontSize: '0.9rem', fontWeight: '500' }}
+            >
+              Login with {loginMethod === 'phone' ? 'Email' : 'Phone Number'}
+            </span>
+          </div>
         </Form>
       </Modal.Body>
     </Modal>
